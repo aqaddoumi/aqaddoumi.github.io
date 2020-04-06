@@ -2,84 +2,68 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>8th Wall Web: A-FRAME</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>TalkAR</title>
 
     <!-- We've included a slightly modified version of A-Frame, which fixes some polish concerns -->
     <script src="//cdn.8thwall.com/web/aframe/8frame-0.8.2.min.js"></script>
-
-    <!-- XR Extras - provides utilities like load screen, almost there, and error handling.
-         See github.com/8thwall/web/xrextras -->
-    <script src="xrextras/src/index.js"></script>
-
-    <!-- 8thWall Web - Replace the app key here with your own app key -->
+    <script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
     <script
       async
       src="//apps.8thwall.com/xrweb?appKey=6GSBAjDK5sqxliljtu4BiY8P6OMN1rH5t9ZjxeOjJt0JlQeO8aIyK4ccQMER1cGbH5cmSE"
     ></script>
+    <script src="index.js"></script>
+    <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
+
   <body>
-    <!-- Add the 'xrweb' attribute to your scene to make it an 8th Wall Web A-FRAME scene. -->
+    <div id="interface-container">
+      <div id="interface-text-container">
+        <h1 id="interface-text">Tap anywhere to see the experience</h1>
+      </div>
+    </div>
+
     <a-scene
-      xrweb
-      xrextras-tap-recenter
+      tap-business-card="videoAsset: #talk-video-asset"
       xrextras-almost-there
       xrextras-loading
       xrextras-runtime-error
+      xrweb
     >
-      <a-camera position="0 8 8"></a-camera>
+      <a-assets>
+        <img id="loading-texture-asset" src="./assets/loading-texture.png" />
+        <img id="grass-texture-asset" src="./assets/grass-texture.png" />
+        <img id="for-sale-texture-asset" src="./assets/for-sale-texture.png" />
+        <a-asset-item
+          id="for-sale-model-asset"
+          src="./assets/for-sale-model.glb"
+        ></a-asset-item>
+        <video
+          id="talk-video-asset"
+          muted
+          autoplay
+          playsinline
+          crossorigin="anonymous"
+          loop="false"
+          src="./assets/talk-video.mp4"
+        ></video>
+      </a-assets>
 
-      <a-entity
-        light="type: directional;
-               castShadow: true;
-               intensity: 0.8;
-               shadowCameraTop: 7;
-               shadowMapHeight: 1024;
-               shadowMapWidth: 1024;"
-        position="1 4.3 2.5"
-      >
-      </a-entity>
-
-      <a-entity
-        light="type: directional; castShadow: false; intensity: 0.5;"
-        position="-0.8 3 1.85"
-      >
-      </a-entity>
-
-      <a-light type="ambient" intensity="1"></a-light>
-
+      <a-camera
+        id="camera"
+        position="0 0 0"
+        raycaster="objects: .cantap"
+        cursor="fuse: false; rayOrigin: mouse;"
+      ></a-camera>
       <a-box
-        position="-1.7 0.5 -2"
-        rotation="0 45 0"
-        material="roughness: 0.8; metalness: 0.2; color: #00EDAF;"
+        id="ground"
+        class="cantap"
+        scale="1000 2 1000"
+        position="0 -1 0"
+        material="shader: shadow; transparent: true; opacity: 0.4"
         shadow
-      >
-      </a-box>
-
-      <a-sphere
-        position="-1.175 1.25 -5.2"
-        radius="1.25"
-        material="roughness: 0.8; metalness: 0.2; color: #DD0065;"
-        shadow
-      >
-      </a-sphere>
-
-      <a-cylinder
-        position="2 0.75 -1.85"
-        radius="0.5"
-        height="1.5"
-        material="roughness: 0.8; metalness: 0.2; color: #FCEE21;"
-        shadow
-      >
-      </a-cylinder>
-
-      <a-circle
-        position="0 0 -4"
-        rotation="-90 0 0"
-        radius="4"
-        material="roughness: 0.8; metalness: 0.5; color: #AD50FF"
-        shadow
-      >
-      </a-circle>
+      ></a-box>
     </a-scene>
   </body>
 </html>

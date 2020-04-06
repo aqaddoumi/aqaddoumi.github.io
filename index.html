@@ -12,7 +12,7 @@
       async
       src="//apps.8thwall.com/xrweb?appKey=6GSBAjDK5sqxliljtu4BiY8P6OMN1rH5t9ZjxeOjJt0JlQeO8aIyK4ccQMER1cGbH5cmSE"
     ></script>
-    <script src="index.js"></script>
+    
     <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
     <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
@@ -23,47 +23,6 @@
         <h1 id="interface-text">Tap anywhere to see the experience</h1>
       </div>
     </div>
-
-    <a-scene
-      tap-business-card="videoAsset: #talk-video-asset"
-      xrextras-almost-there
-      xrextras-loading
-      xrextras-runtime-error
-      xrweb
-    >
-      <a-assets>
-        <img id="loading-texture-asset" src="assets/loading-texture.png" />
-        <img id="grass-texture-asset" src="assets/grass-texture.png" />
-        <img id="for-sale-texture-asset" src="assets/for-sale-texture.png" />
-        <a-asset-item
-          id="for-sale-model-asset"
-          src="assets/for-sale-model.glb"
-        ></a-asset-item>
-        <video
-          id="talk-video-asset"
-          muted
-          autoplay
-          playsinline
-          crossorigin="anonymous"
-          loop="false"
-          src="assets/talk-video.mp4"
-        ></video>
-      </a-assets>
-
-      <a-camera
-        id="camera"
-        position="0 0 0"
-        raycaster="objects: .cantap"
-        cursor="fuse: false; rayOrigin: mouse;"
-      ></a-camera>
-      <a-box
-        id="ground"
-        class="cantap"
-        scale="1000 2 1000"
-        position="0 -1 0"
-        material="shader: shadow; transparent: true; opacity: 0.4"
-        shadow
-      ></a-box>
     </a-scene>
   </body>
 </html>

@@ -36,7 +36,7 @@ AFRAME.registerComponent('tap-business-card', {
     const pop02SoundAsset = document.getElementById('pop-02-sound-asset');
     const whoosh01SoundAsset = document.getElementById('whoosh-01-sound-asset');
 
-    /*//Elements
+    //Elements
     const parentEl = document.createElement('a-entity');
     const videoEl = document.createElement('a-plane');
     const loadingEl = document.createElement('a-plane');
@@ -118,7 +118,7 @@ AFRAME.registerComponent('tap-business-card', {
       signModelEl.appendChild(signTexEl);
     }
 
-    const ground = document.getElementById('ground');
+    /*const ground = document.getElementById('ground');
     ground.addEventListener('click', (event) => {
       const touchPoint = event.detail.intersection.point;
       parentEl.setAttribute('position', touchPoint);

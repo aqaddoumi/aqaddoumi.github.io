@@ -28,13 +28,13 @@ AFRAME.registerComponent('tap-business-card', {
     };*/
 
     //Assets
-    const loadingTexAsset = document.getElementById('loading-texture-asset');
+    /*const loadingTexAsset = document.getElementById('loading-texture-asset');
     const grassTexAsset = document.getElementById('grass-texture-asset');
     const forSaleTexAsset = document.getElementById('for-sale-texture-asset');
 
     const pop01SoundAsset = document.getElementById('pop-01-sound-asset');
     const pop02SoundAsset = document.getElementById('pop-02-sound-asset');
-    const whoosh01SoundAsset = document.getElementById('whoosh-01-sound-asset');
+    const whoosh01SoundAsset = document.getElementById('whoosh-01-sound-asset');*/
 
     /*//Elements
     const parentEl = document.createElement('a-entity');

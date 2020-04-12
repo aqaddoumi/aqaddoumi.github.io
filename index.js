@@ -1,5 +1,6 @@
-AFRAME.registerComponent('tap-business-card', {
-  schema: {
+AFRAME.registerComponent('tap-business-card', {});
+
+/*schema: {
     videoAsset: { type: 'string' },
   },
   init: function () {
@@ -201,5 +202,4 @@ AFRAME.registerComponent('tap-business-card', {
         }
       }
     }
-  },
-});
+  },*/

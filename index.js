@@ -3,7 +3,7 @@ AFRAME.registerComponent('tap-business-card', {
     videoAsset: { type: 'string' },
   },
   init: function () {
-    /*//Assign Element & Data
+    //Assign Element & Data
     const element = this.el;
     const data = this.data;
 
@@ -15,7 +15,7 @@ AFRAME.registerComponent('tap-business-card', {
     //Video Asset
     const videoAsset = document.querySelector(data.videoAsset);
 
-    if (videoAsset.readyState > 3) {
+    /*if (videoAsset.readyState > 3) {
       startExperience();
     }
 
@@ -25,7 +25,7 @@ AFRAME.registerComponent('tap-business-card', {
 
     videoAsset.onended = function () {
       finishExperience();
-    };
+    };*/
 
     //Assets
     const loadingTexAsset = document.getElementById('loading-texture-asset');
@@ -36,7 +36,7 @@ AFRAME.registerComponent('tap-business-card', {
     const pop02SoundAsset = document.getElementById('pop-02-sound-asset');
     const whoosh01SoundAsset = document.getElementById('whoosh-01-sound-asset');
 
-    //Elements
+    /*//Elements
     const parentEl = document.createElement('a-entity');
     const videoEl = document.createElement('a-plane');
     const loadingEl = document.createElement('a-plane');

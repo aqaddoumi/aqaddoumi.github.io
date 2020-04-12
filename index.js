@@ -250,3 +250,10 @@ AFRAME.registerComponent('tap-business-card', {
 });
 
 //      xrextras-almost-there xrextras-loading xrextras-runtime-error xrweb
+
+//<script src="//cdn.8thwall.com/web/aframe/8frame-0.8.2.min.js"></script>
+//<script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
+//<script
+//  async
+//  src="//apps.8thwall.com/xrweb?appKey=6GSBAjDK5sqxliljtu4BiY8P6OMN1rH5t9ZjxeOjJt0JlQeO8aIyK4ccQMER1cGbH5cmSE"
+//></script>

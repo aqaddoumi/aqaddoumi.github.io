@@ -1,4 +1,12 @@
-AFRAME.registerComponent('tap-business-card', {});
+AFRAME.registerComponent('tap-business-card', {
+  init: function () {
+    const el = this.el;
+
+    const box = document.createElement('a-box');
+    box.setAttribute('position', '0 0 -5');
+    el.appendChild(box);
+  },
+});
 
 /*schema: {
     videoAsset: { type: 'string' },

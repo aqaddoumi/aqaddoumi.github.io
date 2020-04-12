@@ -118,7 +118,7 @@ AFRAME.registerComponent('tap-business-card', {
       signModelEl.appendChild(signTexEl);
     }
 
-    /*const ground = document.getElementById('ground');
+    const ground = document.getElementById('ground');
     ground.addEventListener('click', (event) => {
       const touchPoint = event.detail.intersection.point;
       parentEl.setAttribute('position', touchPoint);
@@ -245,6 +245,6 @@ AFRAME.registerComponent('tap-business-card', {
         signTexEl.object3D.visible = false;
         grassEl.object3D.visible = false;
       }, 1000);
-    }*/
+    }
   },
 });

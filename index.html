@@ -2,15 +2,25 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>8th Wall Web: A-FRAME</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>TalkAR</title>
     <script src="//cdn.8thwall.com/web/aframe/8frame-0.8.2.min.js"></script>
     <script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
     <script
       async
       src="//apps.8thwall.com/xrweb?appKey=6GSBAjDK5sqxliljtu4BiY8P6OMN1rH5t9ZjxeOjJt0JlQeO8aIyK4ccQMER1cGbH5cmSE"
     ></script>
+    <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <body>
+    <div id="interface-container">
+      <div id="interface-text-container">
+        <h1 id="interface-text">Tap anywhere to see the experience</h1>
+      </div>
+    </div>
+
     <a-scene
       xrweb
       xrextras-tap-recenter
@@ -24,14 +34,6 @@
         raycaster="objects: .cantap"
         cursor="fuse: false; rayOrigin: mouse;"
       ></a-camera>
-      <a-box
-        id="ground"
-        class="cantap"
-        scale="1000 2 1000"
-        position="0 -1 0"
-        material="shader: shadow; transparent: true; opacity: 0.4"
-        shadow
-      ></a-box>
       <a-box
         position="0 0 -2"
         rotation="0 45 0"

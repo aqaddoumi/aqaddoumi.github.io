@@ -15,7 +15,7 @@ AFRAME.registerComponent('tap-business-card', {
     //Video Asset
     const videoAsset = document.querySelector(data.videoAsset);
 
-    /*if (videoAsset.readyState > 3) {
+    if (videoAsset.readyState > 3) {
       startExperience();
     }
 
@@ -25,7 +25,7 @@ AFRAME.registerComponent('tap-business-card', {
 
     videoAsset.onended = function () {
       finishExperience();
-    };*/
+    };
 
     //Assets
     const loadingTexAsset = document.getElementById('loading-texture-asset');

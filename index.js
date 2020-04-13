@@ -56,7 +56,7 @@ AFRAME.registerComponent('tap-business-card', {
     //Initialize Elements
     createParentElement();
     //createVideoElement();
-    createLoadingElement();
+    //createLoadingElement();
     createGrassElement();
     //createSignElement();
 

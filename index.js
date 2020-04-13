@@ -56,7 +56,7 @@ AFRAME.registerComponent('tap-business-card', {
     //Initialize Elements
     createParentElement();
     //createVideoElement();
-    //createLoadingElement();
+    createLoadingElement();
     createGrassElement();
     //createSignElement();
 
@@ -97,8 +97,8 @@ AFRAME.registerComponent('tap-business-card', {
 
     function createGrassElement() {
       grassEl.object3D.visible = true;
-      //grassEl.setAttribute('scale', '0 0 0');
-      grassEl.setAttribute('scale', '1 1 1');
+      grassEl.setAttribute('scale', '0.5 0.5 0.5');
+      //grassEl.setAttribute('scale', '1 1 1');
       grassEl.setAttribute('rotation', '-90 0 0');
       grassEl.setAttribute('material', 'src', grassTexAsset);
       parentEl.appendChild(grassEl);
@@ -135,6 +135,7 @@ AFRAME.registerComponent('tap-business-card', {
       if (!hasUserTapped) {
         hasUserTapped = true;
         hideInterface();
+        showGrassElement();
 
         /*videoAsset.play();
         videoAsset.pause();
@@ -184,16 +185,16 @@ AFRAME.registerComponent('tap-business-card', {
       }, 100);
     }*/
 
-    /*function showGrassElement() {
+    function showGrassElement() {
       grassEl.object3D.visible = true;
-      grassEl.setAttribute('scale', '0 0 0');
+      //grassEl.setAttribute('scale', '0 0 0');
       grassEl.setAttribute(
         'animation',
         'property: scale; to: 1 1 1; dur: 1000; easing: easeOutElastic; delay: 50;'
       );
-      pop01SoundAsset.currentTime = 0;
-      pop01SoundAsset.play();
-    }*/
+      //pop01SoundAsset.currentTime = 0;
+      //pop01SoundAsset.play();
+    }
 
     /*function showSignElement() {
       signModelEl.object3D.visible = true;

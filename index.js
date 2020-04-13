@@ -188,10 +188,10 @@ AFRAME.registerComponent('tap-business-card', {
     function showGrassElement() {
       grassEl.object3D.visible = true;
       //grassEl.setAttribute('scale', '0 0 0');
-      /*grassEl.setAttribute(
+      grassEl.setAttribute(
         'animation',
-        'property: scale; to: 1 1 1; dur: 1000; easing: easeOutElastic; delay: 50;'
-      );*/
+        'property: scale; to: 1 1 1; dur: 10000; easing: easeOutElastic; delay: 50;'
+      );
       //pop01SoundAsset.currentTime = 0;
       //pop01SoundAsset.play();
     }

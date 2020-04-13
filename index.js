@@ -3,7 +3,7 @@ AFRAME.registerComponent('tap-business-card', {
     videoAsset: { type: 'string' },
   },
   init: function () {
-    //DELETE
+    /*//DELETE
     const element = this.el;
 
     const grassAsset = document.getElementById('grass-texture-asset');
@@ -13,11 +13,11 @@ AFRAME.registerComponent('tap-business-card', {
     plane.setAttribute('position', '0 0 -5');
     element.appendChild(plane);
 
-    //grass-texture-asset
+    //grass-texture-asset*/
 
     //DELETE
 
-    /*//Assign Element & Data
+    //Assign Element & Data
     const element = this.el;
     const data = this.data;
 
@@ -259,6 +259,6 @@ AFRAME.registerComponent('tap-business-card', {
         signTexEl.object3D.visible = false;
         grassEl.object3D.visible = false;
       }, 1000);
-    }*/
+    }
   },
 });

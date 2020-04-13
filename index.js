@@ -96,7 +96,7 @@ AFRAME.registerComponent('tap-business-card', {
     }*/
 
     function createGrassElement() {
-      grassEl.object3D.visible = true;
+      grassEl.object3D.visible = false;
       grassEl.setAttribute('scale', '0.5 0.5 0.5');
       //grassEl.setAttribute('scale', '1 1 1');
       grassEl.setAttribute('rotation', '-90 0 0');
@@ -188,10 +188,10 @@ AFRAME.registerComponent('tap-business-card', {
     function showGrassElement() {
       grassEl.object3D.visible = true;
       //grassEl.setAttribute('scale', '0 0 0');
-      grassEl.setAttribute(
+      /*grassEl.setAttribute(
         'animation',
         'property: scale; to: 1 1 1; dur: 1000; easing: easeOutElastic; delay: 50;'
-      );
+      );*/
       //pop01SoundAsset.currentTime = 0;
       //pop01SoundAsset.play();
     }

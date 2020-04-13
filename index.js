@@ -3,23 +3,17 @@ AFRAME.registerComponent('tap-business-card', {
     videoAsset: { type: 'string' },
   },
   init: function () {
-    /*//DELETE
+    //Assign Element & Data
     const element = this.el;
+    const data = this.data;
 
+    //DELETE
     const grassAsset = document.getElementById('grass-texture-asset');
-
     const plane = document.createElement('a-plane');
     plane.setAttribute('material', 'src', grassAsset);
     plane.setAttribute('position', '0 0 -5');
     element.appendChild(plane);
-
-    //grass-texture-asset*/
-
     //DELETE
-
-    //Assign Element & Data
-    const element = this.el;
-    const data = this.data;
 
     //Variables
     var hasUserTapped = false;
@@ -27,7 +21,7 @@ AFRAME.registerComponent('tap-business-card', {
     var isExperiencePlaying = false;
 
     //Video Asset
-    const videoAsset = document.querySelector(data.videoAsset);
+    /*const videoAsset = document.querySelector(data.videoAsset);
 
     if (videoAsset.readyState > 3) {
       startExperience();
@@ -39,25 +33,25 @@ AFRAME.registerComponent('tap-business-card', {
 
     videoAsset.onended = function () {
       finishExperience();
-    };
+    };*/
 
     //Assets
-    const loadingTexAsset = document.getElementById('loading-texture-asset');
+    //const loadingTexAsset = document.getElementById('loading-texture-asset');
     const grassTexAsset = document.getElementById('grass-texture-asset');
-    const forSaleTexAsset = document.getElementById('for-sale-texture-asset');
+    //const forSaleTexAsset = document.getElementById('for-sale-texture-asset');
 
-    const pop01SoundAsset = document.getElementById('pop-01-sound-asset');
-    const pop02SoundAsset = document.getElementById('pop-02-sound-asset');
-    const whoosh01SoundAsset = document.getElementById('whoosh-01-sound-asset');
+    //const pop01SoundAsset = document.getElementById('pop-01-sound-asset');
+    //const pop02SoundAsset = document.getElementById('pop-02-sound-asset');
+    //const whoosh01SoundAsset = document.getElementById('whoosh-01-sound-asset');
 
     //Elements
     const parentEl = document.createElement('a-entity');
-    const videoEl = document.createElement('a-plane');
-    const loadingEl = document.createElement('a-plane');
+    //const videoEl = document.createElement('a-plane');
+    //const loadingEl = document.createElement('a-plane');
     const grassEl = document.createElement('a-circle');
-    const signEl = document.createElement('a-entity');
-    const signModelEl = document.createElement('a-entity');
-    const signTexEl = document.createElement('a-plane');
+    //const signEl = document.createElement('a-entity');
+    //const signModelEl = document.createElement('a-entity');
+    //const signTexEl = document.createElement('a-plane');
 
     //Initialize Elements
     createParentElement();
@@ -70,7 +64,7 @@ AFRAME.registerComponent('tap-business-card', {
       element.appendChild(parentEl);
     }
 
-    function createVideoElement() {
+    /*function createVideoElement() {
       videoEl.object3D.visible = false;
       videoEl.object3D.translateZ(0.35);
       videoEl.setAttribute('material', 'src', videoAsset);
@@ -87,9 +81,9 @@ AFRAME.registerComponent('tap-business-card', {
       videoEl.object3D.translateY(height / 2);
 
       parentEl.appendChild(videoEl);
-    }
+    }*/
 
-    function createLoadingElement() {
+    /*function createLoadingElement() {
       loadingEl.object3D.visible = false;
       loadingEl.setAttribute('material', 'src', loadingTexAsset);
       loadingEl.setAttribute('material', 'transparent', true);
@@ -99,7 +93,7 @@ AFRAME.registerComponent('tap-business-card', {
         'property: rotation; to: 0 0 -360; dur: 1000; loop: true; easing: linear'
       );
       parentEl.appendChild(loadingEl);
-    }
+    }*/
 
     function createGrassElement() {
       grassEl.object3D.visible = true;
@@ -110,39 +104,39 @@ AFRAME.registerComponent('tap-business-card', {
       parentEl.appendChild(grassEl);
     }
 
-    function createSignElement() {
+    /*function createSignElement() {
       parentEl.appendChild(signEl);
       createSignModel();
       createSignImage();
-    }
+    }*/
 
-    function createSignModel() {
+    /*function createSignModel() {
       signModelEl.object3D.visible = false;
       signModelEl.setAttribute('gltf-model', '#for-sale-model-asset');
       signModelEl.setAttribute('position', '0.5 0 -0.5');
       signModelEl.setAttribute('rotation', '0 60 0');
       signEl.appendChild(signModelEl);
-    }
+    }*/
 
-    function createSignImage() {
+    /*function createSignImage() {
       signTexEl.object3D.visible = false;
       signTexEl.setAttribute('material', 'src', forSaleTexAsset);
       signTexEl.setAttribute('scale', '90 70 1');
       signTexEl.setAttribute('position', '0 125 65');
       signTexEl.setAttribute('rotation', '0 -90 0');
       signModelEl.appendChild(signTexEl);
-    }
+    }*/
 
     const ground = document.getElementById('ground');
     ground.addEventListener('click', (event) => {
       const touchPoint = event.detail.intersection.point;
       parentEl.setAttribute('position', touchPoint);
 
-      /*if (!hasUserTapped) {
+      if (!hasUserTapped) {
         hasUserTapped = true;
         hideInterface();
 
-        videoAsset.play();
+        /*videoAsset.play();
         videoAsset.pause();
 
         pop01SoundAsset.play();
@@ -152,9 +146,9 @@ AFRAME.registerComponent('tap-business-card', {
         pop02SoundAsset.pause();
 
         whoosh01SoundAsset.play();
-        whoosh01SoundAsset.pause();
+        whoosh01SoundAsset.pause();*/
 
-        if (!hasVideoLoaded) {
+        /*if (!hasVideoLoaded) {
           showLoadingElement();
         } else {
           if (!isExperiencePlaying) {
@@ -175,22 +169,22 @@ AFRAME.registerComponent('tap-business-card', {
       userInterface.style.display = 'none';
     }
 
-    function showLoadingElement() {
+    /*function showLoadingElement() {
       loadingEl.object3D.visible = true;
-    }
+    }*/
 
-    function hideLoadingElement() {
+    /*function hideLoadingElement() {
       loadingEl.object3D.visible = false;
-    }
+    }*/
 
-    function showVideoElement() {
+    /*function showVideoElement() {
       setTimeout(function () {
         videoEl.object3D.visible = true;
         videoAsset.muted = false;
       }, 100);
-    }
+    }*/
 
-    function showGrassElement() {
+    /*function showGrassElement() {
       grassEl.object3D.visible = true;
       grassEl.setAttribute('scale', '0 0 0');
       grassEl.setAttribute(
@@ -199,9 +193,9 @@ AFRAME.registerComponent('tap-business-card', {
       );
       pop01SoundAsset.currentTime = 0;
       pop01SoundAsset.play();
-    }
+    }*/
 
-    function showSignElement() {
+    /*function showSignElement() {
       signModelEl.object3D.visible = true;
       signTexEl.object3D.visible = true;
       signModelEl.setAttribute('scale', '0 0 0');
@@ -214,15 +208,15 @@ AFRAME.registerComponent('tap-business-card', {
         pop02SoundAsset.currentTime = 0;
         pop02SoundAsset.play();
       }, 500);
-    }
+    }*/
 
-    function playVideo() {
+    /*function playVideo() {
       videoAsset.currentTime = 0;
       videoAsset.loop = false;
       videoAsset.play();
-    }
+    }*/
 
-    function startExperience() {
+    /*function startExperience() {
       hasVideoLoaded = true;
 
       if (hasUserTapped) {
@@ -237,9 +231,9 @@ AFRAME.registerComponent('tap-business-card', {
           }, 1000);
         }
       }
-    }
+    }*/
 
-    function finishExperience() {
+    /*function finishExperience() {
       signModelEl.setAttribute(
         'animation',
         'property: scale; to: 0 0 0; dur: 1000; easing: easeInElastic; delay: 0'
@@ -260,6 +254,6 @@ AFRAME.registerComponent('tap-business-card', {
         signTexEl.object3D.visible = false;
         grassEl.object3D.visible = false;
       }, 1000);
-    }
+    }*/
   },
 });

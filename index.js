@@ -3,7 +3,21 @@ AFRAME.registerComponent('tap-business-card', {
     videoAsset: { type: 'string' },
   },
   init: function () {
-    //Assign Element & Data
+    //DELETE
+    const element = this.el;
+
+    const grassAsset = document.getElementById('grass-texture-asset');
+
+    const plane = document.createElement('a-plane');
+    plane.setAttribute('material', 'src', grassAsset);
+    plane.setAttribute('position', '0 0 -5');
+    element.appendChild(plane);
+
+    //grass-texture-asset
+
+    //DELETE
+
+    /*//Assign Element & Data
     const element = this.el;
     const data = this.data;
 
@@ -245,14 +259,6 @@ AFRAME.registerComponent('tap-business-card', {
         signTexEl.object3D.visible = false;
         grassEl.object3D.visible = false;
       }, 1000);
-    }
+    }*/
   },
 });
-
-//      xrextras-almost-there xrextras-loading xrextras-runtime-error xrweb
-
-//<script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
-//<script
-//  async
-//  src="//apps.8thwall.com/xrweb?appKey=6GSBAjDK5sqxliljtu4BiY8P6OMN1rH5t9ZjxeOjJt0JlQeO8aIyK4ccQMER1cGbH5cmSE"
-//></script>

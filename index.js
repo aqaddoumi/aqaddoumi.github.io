@@ -13,12 +13,14 @@ AFRAME.registerComponent('tap-business-card', {
     plane.setAttribute('material', 'src', grassAsset);
     plane.setAttribute('position', '0 0 -5');
 
-    plane.setAttribute(
-      'animation',
-      'property: scale; to: 10 10 10; dur: 10000; easing: easeInElastic; delay: 0'
-    );
-
     element.appendChild(plane);
+
+    plane.setAttribute('animation', {
+      property: 'scale',
+      to: '10 10 10',
+      easing: 'easeInElastic',
+      dur: 10000,
+    });
 
     //DELETE
   },

@@ -61,10 +61,10 @@ AFRAME.registerComponent('tap-business-card', {
 
     //Initialize Elements
     createParentElement();
-    createVideoElement();
-    createLoadingElement();
+    //createVideoElement();
+    //createLoadingElement();
     createGrassElement();
-    createSignElement();
+    //createSignElement();
 
     function createParentElement() {
       element.appendChild(parentEl);
@@ -102,8 +102,9 @@ AFRAME.registerComponent('tap-business-card', {
     }
 
     function createGrassElement() {
-      grassEl.object3D.visible = false;
-      grassEl.setAttribute('scale', '0 0 0');
+      grassEl.object3D.visible = true;
+      //grassEl.setAttribute('scale', '0 0 0');
+      grassEl.setAttribute('scale', '1 1 1');
       grassEl.setAttribute('rotation', '-90 0 0');
       grassEl.setAttribute('material', 'src', grassTexAsset);
       parentEl.appendChild(grassEl);
@@ -137,7 +138,7 @@ AFRAME.registerComponent('tap-business-card', {
       const touchPoint = event.detail.intersection.point;
       parentEl.setAttribute('position', touchPoint);
 
-      if (!hasUserTapped) {
+      /*if (!hasUserTapped) {
         hasUserTapped = true;
         hideInterface();
 
@@ -165,7 +166,7 @@ AFRAME.registerComponent('tap-business-card', {
               showVideoElement();
             }, 1000);
           }
-        }
+        }*/
       }
     });
 

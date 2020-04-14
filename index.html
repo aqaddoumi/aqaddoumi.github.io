@@ -19,17 +19,14 @@
     <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <body>
-    <div id="interface-container">
-      <div id="interface-text-container">
-        <h1 id="interface-text">Tap anywhere to see the experience</h1>
-      </div>
-    </div>
-
     <a-scene
       xrweb
+      xrextras-tap-recenter
       xrextras-almost-there
       xrextras-loading
       xrextras-runtime-error
+      xrextras-gesture-detector
+      throw-error
     >
       <a-camera position="0 0 0"></a-camera>
       <a-box position="0 0 -5"></a-box>

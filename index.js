@@ -1,7 +1,6 @@
+XRExtras.AFrame.registerXrExtrasComponents();
+
 AFRAME.registerComponent('tap-business-card', {
-  schema: {
-    videoAsset: { type: 'string' },
-  },
   init: function () {
     //Assign Element & Data
     const element = this.el;

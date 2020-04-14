@@ -301,18 +301,18 @@
 }
 
 body:not(.xrextras-old-style) .prompt-box-8w {
-  background-color: #3a3b55;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
   text-align: center;
 }
 
 body:not(.xrextras-old-style) .prompt-button-8w {
-  background-color: #8083a2;
+  background-color: #5c5c5c;
   border-radius: 10px;
 }
 
 body:not(.xrextras-old-style) .button-primary-8w {
-  background-color: #ad50ff;
+  background-color: #0777f6;
 }
 
 .fade-out {

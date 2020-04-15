@@ -1,4 +1,4 @@
-//Load AFrame
+//XXX Load AFrame
 //Add Component
 
 //Change Logo
@@ -10,38 +10,63 @@
 //Fix Loading Error
 //Upload to Hosting
 
-const xrScene = `
-<a-scene xrweb xrextras-tap-recenter xrextras-almost-there xrextras-loading xrextras-runtime-error
-    xrextras-gesture-detector>
-  <a-camera position="0 3 3"></a-camera>
-  <a-box position="0 0.5 -1" material="color: #7611B6;" shadow xrextras-one-finger-rotate></a-box>
-  <a-box scale="100 2 100" position="0 -1 0" material="shader: shadow" shadow></a-box>
+/*const xrScene = `
+<a-scene xrweb xrextras-almost-there xrextras-loading xrextras-runtime-error>
+  <a-camera position="0 0 0"></a-camera>
+  <a-box position="0 0 -5" material="color: #7611B6;"></a-box>
 </a-scene>
-      `;
+`;*/
+
+const tapBusinessCardComponent = {
+  init: function () {},
+};
 
 window.XRExtras.AFrame.loadAFrameForXr({
   version: 'latest',
-}).then(() => document.body.insertAdjacentHTML('beforeend', xrScene));
+}).then(() => {
+  const bodyEl = document.body;
 
-/*const onxrloaded = () => {
-  XR8.addCameraPipelineModules([
-    XR8.GlTextureRenderer.pipelineModule(),
-    XRExtras.AlmostThere.pipelineModule(),
-    XRExtras.FullWindowCanvas.pipelineModule(),
-    XRExtras.Loading.pipelineModule(),
-    XRExtras.RuntimeError.pipelineModule(),
-  ]);
+  //Create Scene
+  const sceneEl = document.createElement('a-scene');
+  sceneEl.setAttribute('xrweb', '');
+  sceneEl.setAttribute('xrextras-almost-there', '');
+  sceneEl.setAttribute('xrextras-loading', '');
+  sceneEl.setAttribute('xrextras-runtime-error');
 
-  XR8.run({ canvas: document.getElementById('camerafeed') });
-};
+  bodyEl.appendChild(sceneEl);
 
-const load = () => {
-  XRExtras.Loading.showLoading({ onxrloaded });
-};
+  const cameraEl = document.createElement('a-camera');
+  cameraEl.setAttribute('position', '0 0 0');
+  sceneEl.appendChild(cameraEl);
 
-window.onload = () => {
-  window.XRExtras ? load() : window.addEventListener('xrextrasloaded', load);
-};*/
+  const boxEl = document.createElement('a-box');
+  boxEl.setAttribute('position', '0 0 -5');
+  boxEl.setAttribute('material', 'color', '#3621B0');
+  sceneEl.appendChild(boxEl);
+});
+
+/*<div id="interface-container">
+  <div id="interface-text-container">
+    <h1 id="interface-text">Tap anywhere to see the experience</h1>
+  </div>
+</div>
+
+<a-scene tap-business-card="videoAsset: #talk-video-asset" xrextras-almost-there xrextras-loading xrextras-runtime-error xrweb>
+  <a-assets>
+    <audio id="pop-01-sound-asset" src="./assets/pop-01-sound.mp3" preload="auto"></audio>
+    <audio id="pop-02-sound-asset" src="./assets/pop-02-sound.mp3" preload="auto"></audio>
+    <audio id="whoosh-01-sound-asset" src="./assets/whoosh-01-sound.mp3" preload="auto"></audio>
+    <img id="loading-texture-asset" src="./assets/loading-texture.png">
+    <img id="grass-texture-asset" src="./assets/grass-texture.png">
+    <img id="for-sale-texture-asset" src="./assets/for-sale-texture.png">
+    <a-asset-item id="for-sale-model-asset" src="./assets/for-sale-model.glb"></a-asset-item>
+    <video id="talk-video-asset" muted autoplay playsinline crossorigin="anonymous" src="./assets/talk-video.mp4"></video>
+  </a-assets>
+
+  <a-camera id="camera" position="0 0 0" raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse;"></a-camera>
+  <a-box id="ground" class="cantap" scale="1000 2 1000" position="0 -1 0" material="shader: shadow; transparent: true; opacity: 0.4" shadow></a-box>
+
+</a-scene>*/
 
 /*const throwErrorComponent = {
   init: function () {

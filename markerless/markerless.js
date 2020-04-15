@@ -1,18 +1,21 @@
 //XXX Load AFrame
 //XXX Add Component
+//XXX Change Colors
+//XXX Fix Loading Error
 
-//Change Colors
-
-//Change Logo
-//Change Loading Image
 //Load Assets
 //Load Experience
 //Animate Experience
-//Fix Loading Error
+
+//Change Logo
+//Change Loading Image
 //Upload to Hosting
 
 const xrScene = `
 <a-scene xrweb xrextras-almost-there xrextras-loading xrextras-runtime-error tap-business-card>
+  <a-assets>
+    <img id="grass-texture-asset" src="assets/grass-texture.png">
+  </a-assets>
   <a-camera position="0 0 0"></a-camera>
 </a-scene>
 `;
@@ -21,9 +24,11 @@ const tapBusinessCardComponent = {
   init: function () {
     const element = this.el;
 
-    const box = document.createElement('a-circle');
-    box.setAttribute('position', '0 0 -5');
-    element.appendChild(box);
+    const grassTexAsset = document.getElementById('grass-texture-asset');
+    const grassEl = document.createElement('a-circle');
+    grassEl.setAttribute('position', '0 0 -5');
+    grassEl.setAttribute('material', 'src', grassTexAsset);
+    element.appendChild(grassEl);
   },
 };
 

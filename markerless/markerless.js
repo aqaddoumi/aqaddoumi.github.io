@@ -21,7 +21,8 @@ const tapBusinessCardComponent = {
     const element = this.el;
 
     const box = document.createElement('a-box');
-    box.setAttribute('position', '0 1.6 -5');
+    box.setAttribute('position', '0 0 -5');
+    box.setAttribute('material', 'color', '#7611B6');
     element.appendChild(box);
   },
 };

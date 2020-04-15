@@ -95,11 +95,11 @@ const tapBusinessCardComponent = {
       videoEl.object3D.visible = false;
       videoEl.object3D.translateZ(0.35);
       videoEl.setAttribute('material', 'src', videoAsset);
-      videoEl.setAttribute('material', {
+      /*videoEl.setAttribute('material', {
         shader: 'chromakey',
         src: '#talk-video-asset',
         color: '0.1 0.9 0.2',
-      });
+      });*/
 
       const width = 1.5;
       const height = (720 / 404) * width;
@@ -161,10 +161,10 @@ const tapBusinessCardComponent = {
         hasUserTapped = true;
         hideInterface();
 
-        /*videoAsset.play();
+        videoAsset.play();
         videoAsset.pause();
 
-        pop01SoundAsset.play();
+        /*pop01SoundAsset.play();
         pop01SoundAsset.pause();
 
         pop02SoundAsset.play();
@@ -258,7 +258,7 @@ const tapBusinessCardComponent = {
       }
     }
 
-    /*function finishExperience() {
+    function finishExperience() {
       signModelEl.setAttribute(
         'animation',
         'property: scale; to: 0 0 0; dur: 1000; easing: easeInElastic; delay: 0'
@@ -279,7 +279,7 @@ const tapBusinessCardComponent = {
         signTexEl.object3D.visible = false;
         grassEl.object3D.visible = false;
       }, 1000);
-    }*/
+    }
   },
 };
 

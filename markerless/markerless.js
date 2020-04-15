@@ -26,7 +26,7 @@ const xrScene = `
     <img id="grass-texture-asset" src="assets/grass-texture.png">
     <img id="for-sale-texture-asset" src="assets/for-sale-texture.png">
     <a-asset-item id="for-sale-model-asset" src="assets/for-sale-model.glb"></a-asset-item>
-    <video id="talk-video-asset" muted playsinline crossorigin="anonymous" src="assets/talk-video.mp4"></video>
+    <video id="talk-video-asset" muted autoplay playsinline crossorigin="anonymous" src="assets/talk-video.mp4"></video>
   </a-assets>
   <a-camera id="camera" position="0 0 0" raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse;"></a-camera>
   <a-box id="ground" class="cantap" scale="1000 2 1000" position="0 -1 0" material="shader: shadow; transparent: true; opacity: 0.4" shadow></a-box>
@@ -289,39 +289,3 @@ window.XRExtras.AFrame.loadAFrameForXr({
 }).then(() => {
   document.body.insertAdjacentHTML('beforeend', xrScene);
 });
-
-/*const xrScene = `
-<a-scene xrweb xrextras-tap-recenter xrextras-almost-there xrextras-loading xrextras-runtime-error
-    xrextras-gesture-detector throw-error>
-  <a-camera position="0 3 3"></a-camera>
-  <a-box position="0 0.5 -1" material="color: #7611B6;" shadow xrextras-one-finger-rotate></a-box>
-  <a-box scale="100 2 100" position="0 -1 0" material="shader: shadow" shadow></a-box>
-</a-scene>
-      `;
-const throwErrorComponent = {
-  init: function () {
-    // A pipeline module that throws an error after 300 frames -- illustrates the error
-    // handinling in xrweb-runtime-error.
-    const throwerrorPipelineModule = () => {
-      let frame = 0;
-      return {
-        name: 'throwerror',
-        //onUpdate: () => {
-        //  if (++frame > 300) {
-        //throw Error('Too many frames!');
-        //  }
-        //},
-      };
-    };
-    const load = () => {
-      //XR.addCameraPipelineModule(throwerrorPipelineModule());
-    };
-    window.XRExtras && window.XR
-      ? load()
-      : window.addEventListener('xrandextrasloaded', load);
-  },
-};
-window.XRExtras.AFrame.loadAFrameForXr({
-  version: 'latest',
-  //components: { 'throw-error': throwErrorComponent },
-}).then(() => document.body.insertAdjacentHTML('beforeend', xrScene));*/

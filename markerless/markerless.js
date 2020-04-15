@@ -6,8 +6,7 @@
 //XXX Animate Experience
 //XXX Load Experience
 //XXX Change Logo
-
-//Change Loading Image
+//XXX Change Loading Image
 
 //Load Shader
 
@@ -34,6 +33,61 @@ const xrScene = `
   <a-box id="ground" class="cantap" scale="1000 2 1000" position="0 -1 0" material="shader: shadow; transparent: true; opacity: 0.4" shadow></a-box>
 </a-scene>
 `;
+
+const chromakeyShader = {
+  schema: {
+    src: { type: 'map' },
+    color: { default: { x: 0.1, y: 0.9, z: 0.2 }, type: 'vec3', is: 'uniform' },
+    transparent: { default: true, is: 'uniform' },
+  },
+
+  init: function (data) {
+    var videoTexture = new THREE.VideoTexture(data.src);
+    videoTexture.minFilter = THREE.LinearFilter;
+    this.material = new THREE.ShaderMaterial({
+      uniforms: {
+        color: {
+          type: 'c',
+          value: data.color,
+        },
+        texture: {
+          type: 't',
+          value: videoTexture,
+        },
+      },
+      vertexShader: this.vertexShader,
+      fragmentShader: this.fragmentShader,
+    });
+  },
+
+  update: function (data) {
+    this.material.color = data.color;
+    this.material.src = data.src;
+    this.material.transparent = data.transparent;
+  },
+
+  vertexShader: [
+    'varying vec2 vUv;',
+    'void main(void)',
+    '{',
+    'vUv = uv;',
+    'vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );',
+    'gl_Position = projectionMatrix * mvPosition;',
+    '}',
+  ].join('\n'),
+
+  fragmentShader: [
+    'uniform sampler2D texture;',
+    'uniform vec3 color;',
+    'varying vec2 vUv;',
+    'void main(void)',
+    '{',
+    'vec3 tColor = texture2D( texture, vUv ).rgb;',
+    'float a = (length(tColor - color) - 0.5) * 7.0;',
+    'gl_FragColor = vec4(tColor, a);',
+    '}',
+  ].join('\n'),
+};
 
 const tapBusinessCardComponent = {
   schema: {
@@ -97,11 +151,11 @@ const tapBusinessCardComponent = {
       videoEl.object3D.visible = false;
       videoEl.object3D.translateZ(0.35);
       videoEl.setAttribute('material', 'src', videoAsset);
-      /*videoEl.setAttribute('material', {
-        shader: 'chromakey',
+      videoEl.setAttribute('material', {
+        shader: 'chromakey-shader',
         src: '#talk-video-asset',
         color: '0.1 0.9 0.2',
-      });*/
+      });
 
       const width = 1.5;
       const height = (720 / 404) * width;
@@ -287,7 +341,10 @@ const tapBusinessCardComponent = {
 
 window.XRExtras.AFrame.loadAFrameForXr({
   version: 'latest',
-  components: { 'tap-business-card': tapBusinessCardComponent },
+  components: {
+    'chromakey-shader': chromakeyShader,
+    'tap-business-card': tapBusinessCardComponent,
+  },
 }).then(() => {
   document.body.insertAdjacentHTML('beforeend', xrScene);
 });

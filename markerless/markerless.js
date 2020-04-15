@@ -95,11 +95,11 @@ const tapBusinessCardComponent = {
       videoEl.object3D.visible = false;
       videoEl.object3D.translateZ(0.35);
       videoEl.setAttribute('material', 'src', videoAsset);
-      /*videoEl.setAttribute('material', {
+      videoEl.setAttribute('material', {
         shader: 'chromakey',
         src: '#talk-video-asset',
         color: '0.1 0.9 0.2',
-      });*/
+      });
 
       const width = 1.5;
       const height = (720 / 404) * width;

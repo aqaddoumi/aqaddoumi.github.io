@@ -94,6 +94,8 @@ const tapBusinessCardComponent = {
     videoAsset: { type: 'string' },
   },
   init: function () {
+    window.XRExtras.AFrame.registerShader('chromakey', chromakeyShader);
+
     //Assign Element & Data
     const element = this.el;
     const data = this.data;
@@ -152,7 +154,7 @@ const tapBusinessCardComponent = {
       videoEl.object3D.translateZ(0.35);
       videoEl.setAttribute('material', 'src', videoAsset);
       videoEl.setAttribute('material', {
-        shader: 'chromakey-shader',
+        shader: 'chromakey',
         src: '#talk-video-asset',
         color: '0.1 0.9 0.2',
       });
@@ -342,7 +344,6 @@ const tapBusinessCardComponent = {
 window.XRExtras.AFrame.loadAFrameForXr({
   version: 'latest',
   components: {
-    'chromakey-shader': chromakeyShader,
     'tap-business-card': tapBusinessCardComponent,
   },
 }).then(() => {

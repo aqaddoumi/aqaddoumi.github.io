@@ -78,6 +78,9 @@ function create() {
       AFRAME.registerComponent(k, components[k])
     );
 
+  const registerShaders = (shaders) =>
+    Object.keys(shaders).map((k) => AFRAME.registerShader(k, shaders[k]));
+
   // Load the 8th Wall preferred version of AFrame at runtime ensuring that xr components are added.
   const loadAFrameForXr = (args) => {
     const { version = 'latest', components = {} } = args || {};

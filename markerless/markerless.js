@@ -48,7 +48,7 @@ const tapBusinessCardComponent = {
     var isExperiencePlaying = false;
 
     //Video Asset
-    /*const videoAsset = document.querySelector(data.videoAsset);
+    const videoAsset = document.querySelector(data.videoAsset);
 
     if (videoAsset.readyState > 3) {
       startExperience();
@@ -58,7 +58,7 @@ const tapBusinessCardComponent = {
       startExperience();
     };
 
-    videoAsset.onended = function () {
+    /*videoAsset.onended = function () {
       finishExperience();
     };*/
 
@@ -73,7 +73,7 @@ const tapBusinessCardComponent = {
 
     //Elements
     const parentEl = document.createElement('a-entity');
-    //const videoEl = document.createElement('a-plane');
+    const videoEl = document.createElement('a-plane');
     const loadingEl = document.createElement('a-plane');
     const grassEl = document.createElement('a-circle');
     const signEl = document.createElement('a-entity');
@@ -82,7 +82,7 @@ const tapBusinessCardComponent = {
 
     //Initialize Elements
     createParentElement();
-    //createVideoElement();
+    createVideoElement();
     createLoadingElement();
     createGrassElement();
     createSignElement();
@@ -91,7 +91,7 @@ const tapBusinessCardComponent = {
       element.appendChild(parentEl);
     }
 
-    /*function createVideoElement() {
+    function createVideoElement() {
       videoEl.object3D.visible = false;
       videoEl.object3D.translateZ(0.35);
       videoEl.setAttribute('material', 'src', videoAsset);
@@ -108,7 +108,7 @@ const tapBusinessCardComponent = {
       videoEl.object3D.translateY(height / 2);
 
       parentEl.appendChild(videoEl);
-    }*/
+    }
 
     function createLoadingElement() {
       loadingEl.object3D.visible = false;
@@ -180,10 +180,10 @@ const tapBusinessCardComponent = {
             isExperiencePlaying = true;
             showGrassElement();
             showSignElement();
-            /*setTimeout(function () {
+            setTimeout(function () {
               playVideo();
               showVideoElement();
-            }, 1000);*/
+            }, 1000);
           }
         }
       }
@@ -198,16 +198,16 @@ const tapBusinessCardComponent = {
       loadingEl.object3D.visible = true;
     }
 
-    /*function hideLoadingElement() {
+    function hideLoadingElement() {
       loadingEl.object3D.visible = false;
-    }*/
+    }
 
-    /*function showVideoElement() {
+    function showVideoElement() {
       setTimeout(function () {
         videoEl.object3D.visible = true;
         videoAsset.muted = false;
       }, 100);
-    }*/
+    }
 
     function showGrassElement() {
       grassEl.object3D.visible = true;
@@ -235,13 +235,13 @@ const tapBusinessCardComponent = {
       }, 500);*/
     }
 
-    /*function playVideo() {
+    function playVideo() {
       videoAsset.currentTime = 0;
       videoAsset.loop = false;
       videoAsset.play();
-    }*/
+    }
 
-    /*function startExperience() {
+    function startExperience() {
       hasVideoLoaded = true;
 
       if (hasUserTapped) {
@@ -256,7 +256,7 @@ const tapBusinessCardComponent = {
           }, 1000);
         }
       }
-    }*/
+    }
 
     /*function finishExperience() {
       signModelEl.setAttribute(
@@ -268,8 +268,8 @@ const tapBusinessCardComponent = {
         'property: scale; to: 0 0 0; dur: 1000; easing: easeInElastic; delay: 0'
       );
 
-      whoosh01SoundAsset.currentTime = 0;
-      whoosh01SoundAsset.play();
+      //whoosh01SoundAsset.currentTime = 0;
+      //whoosh01SoundAsset.play();
 
       setTimeout(function () {
         hasUserTapped = false;

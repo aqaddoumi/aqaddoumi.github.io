@@ -94,7 +94,7 @@ const tapBusinessCardComponent = {
     videoAsset: { type: 'string' },
   },
   init: function () {
-    window.XRExtras.AFrame.registerShader('chromakey', chromakeyShader);
+    //window.XRExtras.AFrame.registerShader('chromakey', chromakeyShader);
 
     //Assign Element & Data
     const element = this.el;
@@ -343,9 +343,10 @@ const tapBusinessCardComponent = {
 
 window.XRExtras.AFrame.loadAFrameForXr({
   version: 'latest',
-  components: {
+  /*components: {
     'tap-business-card': tapBusinessCardComponent,
-  },
+  },*/
 }).then(() => {
+  AFRAME.registerComponent('tap-business-card', tapBusinessCardComponent);
   document.body.insertAdjacentHTML('beforeend', xrScene);
 });

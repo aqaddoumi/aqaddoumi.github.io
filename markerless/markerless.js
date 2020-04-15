@@ -26,7 +26,7 @@ const xrScene = `
     <img id="grass-texture-asset" src="assets/grass-texture.png">
     <img id="for-sale-texture-asset" src="assets/for-sale-texture.png">
     <a-asset-item id="for-sale-model-asset" src="assets/for-sale-model.glb"></a-asset-item>
-    <video id="talk-video-asset" muted autoplay playsinline crossorigin="anonymous" src="assets/talk-video.mp4"></video>
+    <video id="talk-video-asset" muted playsinline crossorigin="anonymous" src="assets/talk-video.mp4"></video>
   </a-assets>
   <a-camera id="camera" position="0 0 0" raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse;"></a-camera>
   <a-box id="ground" class="cantap" scale="1000 2 1000" position="0 -1 0" material="shader: shadow; transparent: true; opacity: 0.4" shadow></a-box>
@@ -63,7 +63,7 @@ const tapBusinessCardComponent = {
     };*/
 
     //Assets
-    //const loadingTexAsset = document.getElementById('loading-texture-asset');
+    const loadingTexAsset = document.getElementById('loading-texture-asset');
     const grassTexAsset = document.getElementById('grass-texture-asset');
     const forSaleTexAsset = document.getElementById('for-sale-texture-asset');
 
@@ -74,7 +74,7 @@ const tapBusinessCardComponent = {
     //Elements
     const parentEl = document.createElement('a-entity');
     //const videoEl = document.createElement('a-plane');
-    //const loadingEl = document.createElement('a-plane');
+    const loadingEl = document.createElement('a-plane');
     const grassEl = document.createElement('a-circle');
     const signEl = document.createElement('a-entity');
     const signModelEl = document.createElement('a-entity');
@@ -83,7 +83,7 @@ const tapBusinessCardComponent = {
     //Initialize Elements
     createParentElement();
     //createVideoElement();
-    //createLoadingElement();
+    createLoadingElement();
     createGrassElement();
     createSignElement();
 
@@ -110,7 +110,7 @@ const tapBusinessCardComponent = {
       parentEl.appendChild(videoEl);
     }*/
 
-    /*function createLoadingElement() {
+    function createLoadingElement() {
       loadingEl.object3D.visible = false;
       loadingEl.setAttribute('material', 'src', loadingTexAsset);
       loadingEl.setAttribute('material', 'transparent', true);
@@ -120,7 +120,7 @@ const tapBusinessCardComponent = {
         'property: rotation; to: 0 0 -360; dur: 1000; loop: true; easing: linear'
       );
       parentEl.appendChild(loadingEl);
-    }*/
+    }
 
     function createGrassElement() {
       grassEl.object3D.visible = false;
@@ -161,10 +161,6 @@ const tapBusinessCardComponent = {
         hasUserTapped = true;
         hideInterface();
 
-        //DELETE
-        showGrassElement();
-        showSignElement();
-
         /*videoAsset.play();
         videoAsset.pause();
 
@@ -177,19 +173,19 @@ const tapBusinessCardComponent = {
         whoosh01SoundAsset.play();
         whoosh01SoundAsset.pause();*/
 
-        /*if (!hasVideoLoaded) {
+        if (!hasVideoLoaded) {
           showLoadingElement();
         } else {
           if (!isExperiencePlaying) {
             isExperiencePlaying = true;
             showGrassElement();
             showSignElement();
-            setTimeout(function () {
+            /*setTimeout(function () {
               playVideo();
               showVideoElement();
-            }, 1000);
+            }, 1000);*/
           }
-        }*/
+        }
       }
     });
 
@@ -198,9 +194,9 @@ const tapBusinessCardComponent = {
       userInterface.style.display = 'none';
     }
 
-    /*function showLoadingElement() {
+    function showLoadingElement() {
       loadingEl.object3D.visible = true;
-    }*/
+    }
 
     /*function hideLoadingElement() {
       loadingEl.object3D.visible = false;

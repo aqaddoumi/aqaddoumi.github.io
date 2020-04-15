@@ -24,6 +24,7 @@ const tapBusinessCardComponent = {
 window.XRExtras.AFrame.loadAFrameForXr({
   version: 'latest',
 }).then(() => {
+  //Body
   const bodyEl = document.body;
 
   //Create Scene
@@ -32,13 +33,14 @@ window.XRExtras.AFrame.loadAFrameForXr({
   sceneEl.setAttribute('xrextras-almost-there', '');
   sceneEl.setAttribute('xrextras-loading', '');
   sceneEl.setAttribute('xrextras-runtime-error');
-
   bodyEl.appendChild(sceneEl);
 
-  const cameraEl = document.createElement('a-camera');
+  //Camera
+  const cameraEl = sceneEl.cameraEl;
   cameraEl.setAttribute('position', '0 0 0');
   sceneEl.appendChild(cameraEl);
 
+  //Box
   const boxEl = document.createElement('a-box');
   boxEl.setAttribute('position', '0 0 -5');
   boxEl.setAttribute('material', 'color', '#3621B0');

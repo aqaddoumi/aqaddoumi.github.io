@@ -36,7 +36,7 @@ window.XRExtras.AFrame.loadAFrameForXr({
   bodyEl.appendChild(sceneEl);
 
   //Camera
-  const cameraEl = sceneEl.cameraEl;
+  const cameraEl = sceneEl.camera;
   cameraEl.setAttribute('position', '0 0 0');
   sceneEl.appendChild(cameraEl);
 

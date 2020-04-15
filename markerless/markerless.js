@@ -10,42 +10,27 @@
 //Fix Loading Error
 //Upload to Hosting
 
-/*const xrScene = `
-<a-scene xrweb xrextras-almost-there xrextras-loading xrextras-runtime-error>
+const xrScene = `
+<a-scene xrweb xrextras-almost-there xrextras-loading xrextras-runtime-error tap-business-card>
   <a-camera position="0 0 0"></a-camera>
-  <a-box position="0 0 -5" material="color: #7611B6;"></a-box>
 </a-scene>
-`;*/
+`;
 
 const tapBusinessCardComponent = {
-  init: function () {},
+  init: function () {
+    const element = this.el;
+
+    const box = document.createElement('a-box');
+    box.setAttribute('position', '0 0 -5');
+    element.appendChild(box);
+  },
 };
 
 window.XRExtras.AFrame.loadAFrameForXr({
   version: 'latest',
+  components: { 'tap-business-card': tapBusinessCardComponent },
 }).then(() => {
-  //Body
-  const bodyEl = document.body;
-
-  //Create Scene
-  const sceneEl = document.createElement('a-scene');
-  sceneEl.setAttribute('xrweb', '');
-  sceneEl.setAttribute('xrextras-almost-there', '');
-  sceneEl.setAttribute('xrextras-loading', '');
-  sceneEl.setAttribute('xrextras-runtime-error');
-  bodyEl.appendChild(sceneEl);
-
-  //Camera
-  const cameraEl = document.createElement('a-camera');
-  cameraEl.setAttribute('position', '0 0 0');
-  sceneEl.camera = cameraEl;
-  sceneEl.appendChild(cameraEl);
-
-  //Box
-  const boxEl = document.createElement('a-box');
-  boxEl.setAttribute('position', '0 0 -5');
-  boxEl.setAttribute('material', 'color', '#3621B0');
-  sceneEl.appendChild(boxEl);
+  document.body.insertAdjacentHTML('beforeend', xrScene);
 });
 
 /*<div id="interface-container">

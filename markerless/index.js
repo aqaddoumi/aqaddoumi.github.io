@@ -1,4 +1,15 @@
-const onxrloaded = () => {
+//Load AFrame
+
+//Change Logo
+//Change Loading Image
+//Change Colors
+//Load Assets
+//Load Experience
+//Animate Experience
+//Fix Loading Error
+//Upload to Hosting
+
+/*const onxrloaded = () => {
   XR8.addCameraPipelineModules([
     XR8.GlTextureRenderer.pipelineModule(),
     XRExtras.AlmostThere.pipelineModule(),
@@ -16,4 +27,4 @@ const load = () => {
 
 window.onload = () => {
   window.XRExtras ? load() : window.addEventListener('xrextrasloaded', load);
-};
+};*/

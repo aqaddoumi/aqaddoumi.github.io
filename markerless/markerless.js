@@ -4,11 +4,13 @@
 //XXX Fix Loading Error
 //XXX Load Assets
 //XXX Animate Experience
+//XXX Load Experience
+//XXX Change Logo
 
-//Load Experience
-
-//Change Logo
 //Change Loading Image
+
+//Load Shader
+
 //Upload to Hosting
 
 const xrScene = `

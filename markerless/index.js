@@ -28,3 +28,39 @@ const load = () => {
 window.onload = () => {
   window.XRExtras ? load() : window.addEventListener('xrextrasloaded', load);
 };*/
+
+/*const throwErrorComponent = {
+  init: function () {
+    // A pipeline module that throws an error after 300 frames -- illustrates the error
+    // handinling in xrweb-runtime-error.
+    const throwerrorPipelineModule = () => {
+      let frame = 0;
+      return {
+        name: 'throwerror',
+        onUpdate: () => {
+          if (++frame > 300) {
+            throw Error('Too many frames!');
+          }
+        },
+      };
+    };
+    const load = () => {
+      XR.addCameraPipelineModule(throwerrorPipelineModule());
+    };
+    window.XRExtras && window.XR
+      ? load()
+      : window.addEventListener('xrandextrasloaded', load);
+  },
+};*/
+const xrScene = `
+<a-scene xrweb xrextras-tap-recenter xrextras-almost-there xrextras-loading xrextras-runtime-error
+    xrextras-gesture-detector>
+  <a-camera position="0 3 3"></a-camera>
+  <a-box position="0 0.5 -1" material="color: #7611B6;" shadow xrextras-one-finger-rotate></a-box>
+  <a-box scale="100 2 100" position="0 -1 0" material="shader: shadow" shadow></a-box>
+</a-scene>
+`;
+
+window.XRExtras.AFrame.loadAFrameForXr({
+  version: 'latest',
+}).then(() => document.body.insertAdjacentHTML('beforeend', xrScene));

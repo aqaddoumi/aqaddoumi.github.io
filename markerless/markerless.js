@@ -19,14 +19,14 @@ const xrScene = `
 </div>
 <a-scene tap-business-card="videoAsset: #talk-video-asset" xrweb xrextras-almost-there xrextras-loading xrextras-runtime-error>
   <a-assets>
-    <audio id="pop-01-sound-asset" src="./assets/pop-01-sound.mp3" preload="auto"></audio>
-    <audio id="pop-02-sound-asset" src="./assets/pop-02-sound.mp3" preload="auto"></audio>
-    <audio id="whoosh-01-sound-asset" src="./assets/whoosh-01-sound.mp3" preload="auto"></audio>
-    <img id="loading-texture-asset" src="./assets/loading-texture.png">
-    <img id="grass-texture-asset" src="./assets/grass-texture.png">
-    <img id="for-sale-texture-asset" src="./assets/for-sale-texture.png">
-    <a-asset-item id="for-sale-model-asset" src="./assets/for-sale-model.glb"></a-asset-item>
-    <video id="talk-video-asset" muted autoplay playsinline crossorigin="anonymous" src="./assets/talk-video.mp4"></video>
+    <audio id="pop-01-sound-asset" src="assets/pop-01-sound.mp3" preload="auto"></audio>
+    <audio id="pop-02-sound-asset" src="assets/pop-02-sound.mp3" preload="auto"></audio>
+    <audio id="whoosh-01-sound-asset" src="assets/whoosh-01-sound.mp3" preload="auto"></audio>
+    <img id="loading-texture-asset" src="assets/loading-texture.png">
+    <img id="grass-texture-asset" src="assets/grass-texture.png">
+    <img id="for-sale-texture-asset" src="assets/for-sale-texture.png">
+    <a-asset-item id="for-sale-model-asset" src="assets/for-sale-model.glb"></a-asset-item>
+    <video id="talk-video-asset" muted autoplay playsinline crossorigin="anonymous" src="assets/talk-video.mp4"></video>
   </a-assets>
   <a-camera id="camera" position="0 0 0" raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse;"></a-camera>
   <a-box id="ground" class="cantap" scale="1000 2 1000" position="0 -1 0" material="shader: shadow; transparent: true; opacity: 0.4" shadow></a-box>
@@ -123,7 +123,7 @@ const tapBusinessCardComponent = {
     }*/
 
     function createGrassElement() {
-      //grassEl.object3D.visible = false;
+      grassEl.object3D.visible = false;
       grassEl.setAttribute('scale', '1 1 1');
       grassEl.setAttribute('rotation', '-90 0 0');
       grassEl.setAttribute('material', 'src', grassTexAsset);
@@ -160,7 +160,7 @@ const tapBusinessCardComponent = {
 
       if (!hasUserTapped) {
         hasUserTapped = true;
-        //hideInterface();
+        hideInterface();
 
         //DELETE
         showGrassElement();
@@ -193,10 +193,10 @@ const tapBusinessCardComponent = {
       }
     });
 
-    /*function hideInterface() {
+    function hideInterface() {
       const userInterface = document.getElementById('interface-container');
       userInterface.style.display = 'none';
-    }*/
+    }
 
     /*function showLoadingElement() {
       loadingEl.object3D.visible = true;
@@ -214,11 +214,11 @@ const tapBusinessCardComponent = {
     }*/
 
     function showGrassElement() {
-      //grassEl.object3D.visible = true;
-      //grassEl.setAttribute('scale', '0 0 0');
+      grassEl.object3D.visible = true;
+      grassEl.setAttribute('scale', '0 0 0');
       grassEl.setAttribute(
         'animation',
-        'property: scale; to: 10 10 10; dur: 1000; easing: easeOutElastic; delay: 50;'
+        'property: scale; to: 1 1 1; dur: 1000; easing: easeOutElastic; delay: 50;'
       );
       //pop01SoundAsset.currentTime = 0;
       //pop01SoundAsset.play();

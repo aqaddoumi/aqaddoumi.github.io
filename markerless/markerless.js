@@ -69,11 +69,11 @@ const throwErrorComponent = {
       let frame = 0;
       return {
         name: 'throwerror',
-        onUpdate: () => {
-          if (++frame > 300) {
-            throw Error('Too many frames!');
-          }
-        },
+        //onUpdate: () => {
+        //  if (++frame > 300) {
+        //throw Error('Too many frames!');
+        //  }
+        //},
       };
     };
     const load = () => {

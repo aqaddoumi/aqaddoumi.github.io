@@ -18,13 +18,14 @@
     <script>
       const xrScene = `
 <a-scene xrweb xrextras-tap-recenter xrextras-almost-there xrextras-loading xrextras-runtime-error
-    xrextras-gesture-detector throw-error>
+    xrextras-gesture-detector>
   <a-camera position="0 3 3"></a-camera>
   <a-box position="0 0.5 -1" material="color: #7611B6;" shadow xrextras-one-finger-rotate></a-box>
   <a-box scale="100 2 100" position="0 -1 0" material="shader: shadow" shadow></a-box>
 </a-scene>
       `;
-      const throwErrorComponent = {
+      // throw-error
+      /*const throwErrorComponent = {
         init: function () {
           // A pipeline module that throws an error after 300 frames -- illustrates the error
           // handinling in xrweb-runtime-error.
@@ -46,10 +47,10 @@
             ? load()
             : window.addEventListener('xrandextrasloaded', load);
         },
-      };
+      };*/
       window.XRExtras.AFrame.loadAFrameForXr({
         version: 'latest',
-        components: { 'throw-error': throwErrorComponent },
+        //components: { 'throw-error': throwErrorComponent },
       }).then(() => document.body.insertAdjacentHTML('beforeend', xrScene));
     </script>
   </body>

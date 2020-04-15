@@ -1,4 +1,5 @@
 //Load AFrame
+//Add Component
 
 //Change Logo
 //Change Loading Image

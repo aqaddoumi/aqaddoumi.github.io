@@ -58,18 +58,18 @@ const tapBusinessCardComponent = {
       startExperience();
     };
 
-    /*videoAsset.onended = function () {
+    videoAsset.onended = function () {
       finishExperience();
-    };*/
+    };
 
     //Assets
     const loadingTexAsset = document.getElementById('loading-texture-asset');
     const grassTexAsset = document.getElementById('grass-texture-asset');
     const forSaleTexAsset = document.getElementById('for-sale-texture-asset');
 
-    //const pop01SoundAsset = document.getElementById('pop-01-sound-asset');
-    //const pop02SoundAsset = document.getElementById('pop-02-sound-asset');
-    //const whoosh01SoundAsset = document.getElementById('whoosh-01-sound-asset');
+    const pop01SoundAsset = document.getElementById('pop-01-sound-asset');
+    const pop02SoundAsset = document.getElementById('pop-02-sound-asset');
+    const whoosh01SoundAsset = document.getElementById('whoosh-01-sound-asset');
 
     //Elements
     const parentEl = document.createElement('a-entity');
@@ -95,11 +95,11 @@ const tapBusinessCardComponent = {
       videoEl.object3D.visible = false;
       videoEl.object3D.translateZ(0.35);
       videoEl.setAttribute('material', 'src', videoAsset);
-      videoEl.setAttribute('material', {
+      /*videoEl.setAttribute('material', {
         shader: 'chromakey',
         src: '#talk-video-asset',
         color: '0.1 0.9 0.2',
-      });
+      });*/
 
       const width = 1.5;
       const height = (720 / 404) * width;
@@ -164,14 +164,14 @@ const tapBusinessCardComponent = {
         videoAsset.play();
         videoAsset.pause();
 
-        /*pop01SoundAsset.play();
+        pop01SoundAsset.play();
         pop01SoundAsset.pause();
 
         pop02SoundAsset.play();
         pop02SoundAsset.pause();
 
         whoosh01SoundAsset.play();
-        whoosh01SoundAsset.pause();*/
+        whoosh01SoundAsset.pause();
 
         if (!hasVideoLoaded) {
           showLoadingElement();
@@ -216,8 +216,8 @@ const tapBusinessCardComponent = {
         'animation',
         'property: scale; to: 1 1 1; dur: 1000; easing: easeOutElastic; delay: 50;'
       );
-      //pop01SoundAsset.currentTime = 0;
-      //pop01SoundAsset.play();
+      pop01SoundAsset.currentTime = 0;
+      pop01SoundAsset.play();
     }
 
     function showSignElement() {
@@ -229,10 +229,10 @@ const tapBusinessCardComponent = {
         'property: scale; to: 0.01 0.01 0.01; dur: 1500; easing: easeOutElastic; delay: 500;'
       );
 
-      /*setTimeout(function () {
+      setTimeout(function () {
         pop02SoundAsset.currentTime = 0;
         pop02SoundAsset.play();
-      }, 500);*/
+      }, 500);
     }
 
     function playVideo() {
@@ -268,8 +268,8 @@ const tapBusinessCardComponent = {
         'property: scale; to: 0 0 0; dur: 1000; easing: easeInElastic; delay: 0'
       );
 
-      //whoosh01SoundAsset.currentTime = 0;
-      //whoosh01SoundAsset.play();
+      whoosh01SoundAsset.currentTime = 0;
+      whoosh01SoundAsset.play();
 
       setTimeout(function () {
         hasUserTapped = false;

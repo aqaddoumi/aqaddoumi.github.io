@@ -19,7 +19,7 @@ function create() {
 
   // NOTE: new versions of 8frame should be added in descending order, so that the latest version
   // is always in position 1.
-  const allowed8FrameVersions = ['latest', '0.9.0', '0.8.2'];
+  const allowed8FrameVersions = ['latest', '1.0.4', '0.9.0', '0.8.2'];
   const LATEST_8FRAME = allowed8FrameVersions[1]; // The 'latest' version of 8frame.
 
   // Check that the requested version of AFrame has a corresponding 8Frame implementation.

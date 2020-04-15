@@ -1,9 +1,10 @@
 //XXX Load AFrame
-//Add Component
+//XXX Add Component
+
+//Change Colors
 
 //Change Logo
 //Change Loading Image
-//Change Colors
 //Load Assets
 //Load Experience
 //Animate Experience
@@ -20,9 +21,8 @@ const tapBusinessCardComponent = {
   init: function () {
     const element = this.el;
 
-    const box = document.createElement('a-box');
+    const box = document.createElement('a-circle');
     box.setAttribute('position', '0 0 -5');
-    box.setAttribute('material', 'color', '#7611B6');
     element.appendChild(box);
   },
 };

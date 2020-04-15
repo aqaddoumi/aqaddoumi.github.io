@@ -61,6 +61,14 @@ const xrScene = `
 </a-scene>
 `;
 
+const load = () => {
+  XRExtras.Loading.showLoading({ onxrloaded });
+};
+
+window.onload = () => {
+  window.XRExtras ? load() : window.addEventListener('xrextrasloaded', load);
+};
+
 window.XRExtras.AFrame.loadAFrameForXr({
   version: 'latest',
 }).then(() => document.body.insertAdjacentHTML('beforeend', xrScene));

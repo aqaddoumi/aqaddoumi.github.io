@@ -12,6 +12,7 @@
     <!-- XR Extras - provides utilities like load screen, almost there, and error handling.
          See github.com/8thwall/web/xrextras -->
     <script src="../xrextras/dist/xrextras.js"></script>
+    <script src="markerless.js"></script>
   </head>
 
   <body>
@@ -24,33 +25,8 @@
   <a-box scale="100 2 100" position="0 -1 0" material="shader: shadow" shadow></a-box>
 </a-scene>
       `;
-      // throw-error
-      /*const throwErrorComponent = {
-        init: function () {
-          // A pipeline module that throws an error after 300 frames -- illustrates the error
-          // handinling in xrweb-runtime-error.
-          const throwerrorPipelineModule = () => {
-            let frame = 0;
-            return {
-              name: 'throwerror',
-              //onUpdate: () => {
-              //  if (++frame > 300) {
-              //    throw Error('Too many frames!');
-              //  }
-              //},
-            };
-          };
-          const load = () => {
-            XR.addCameraPipelineModule(throwerrorPipelineModule());
-          };
-          window.XRExtras && window.XR
-            ? load()
-            : window.addEventListener('xrandextrasloaded', load);
-        },
-      };*/
       window.XRExtras.AFrame.loadAFrameForXr({
         version: 'latest',
-        //components: { 'throw-error': throwErrorComponent },
       }).then(() => document.body.insertAdjacentHTML('beforeend', xrScene));
     </script>
   </body>

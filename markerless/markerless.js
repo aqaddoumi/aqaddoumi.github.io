@@ -77,7 +77,7 @@ const throwErrorComponent = {
       };
     };
     const load = () => {
-      XR.addCameraPipelineModule(throwerrorPipelineModule());
+      //XR.addCameraPipelineModule(throwerrorPipelineModule());
     };
     window.XRExtras && window.XR
       ? load()
@@ -86,5 +86,5 @@ const throwErrorComponent = {
 };
 window.XRExtras.AFrame.loadAFrameForXr({
   version: 'latest',
-  components: { 'throw-error': throwErrorComponent },
+  //components: { 'throw-error': throwErrorComponent },
 }).then(() => document.body.insertAdjacentHTML('beforeend', xrScene));

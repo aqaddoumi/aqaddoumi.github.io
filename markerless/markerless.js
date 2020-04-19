@@ -212,6 +212,12 @@ const tapBusinessCardComponent = {
 
     const ground = document.getElementById('ground');
     ground.addEventListener('click', (event) => {
+      //console.log(parent.object3D.rotation.y);
+      const camera = document.getElementById('camera-entity').object3D;
+      console.log('X: ' + camera.position.x);
+      console.log('Y: ' + camera.position.y);
+      console.log('Z: ' + camera.position.z);
+
       const touchPoint = event.detail.intersection.point;
       parentEl.setAttribute('position', touchPoint);
 
@@ -340,10 +346,13 @@ const tapBusinessCardComponent = {
     }
   },
   tick: function () {
-    const parent = document.getElementById('parent-entity').object3D;
-    console.log(parent.position.x);
-    //const camera = document.getElementById('camera-entity').object3D;
+    /*const ground = document.getElementById('ground');
+    ground.addEventListener('click', (event) => {
 
+    }*/
+    //const parent = document.getElementById('parent-entity').object3D;
+    //console.log(parent.position.x);
+    //const camera = document.getElementById('camera-entity').object3D;
     /*parent.rotation.y = Math.atan2(
       camera.position.x - parent.position.x,
       camera.position.z - parent.position.z

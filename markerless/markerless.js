@@ -340,11 +340,11 @@ const tapBusinessCardComponent = {
     }
   },
   tick: function () {
-    console.log('TEST');
-    /*const parent = document.getElementById('parent-entity').object3D;
-    const camera = document.getElementById('camera-entity').object3D;
+    const parent = document.getElementById('parent-entity').object3D;
+    console.log(parent.position);
+    //const camera = document.getElementById('camera-entity').object3D;
 
-    parent.rotation.y = Math.atan2(
+    /*parent.rotation.y = Math.atan2(
       camera.position.x - parent.position.x,
       camera.position.z - parent.position.z
     );*/

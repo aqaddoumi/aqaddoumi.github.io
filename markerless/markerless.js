@@ -17,7 +17,7 @@ const xrScene = `
     <h1 id="interface-text">Tap anywhere to see the experience</h1>
   </div>
 </div>
-<a-scene tap-business-card="videoAsset: #talk-video-asset" xrweb xrextras-almost-there xrextras-loading xrextras-runtime-error>
+<a-scene tap-business-card="videoAsset: #talk-video-asset" xrweb xrextras-almost-there xrextras-loading xrextras-runtime-error xrextras-log-to-screen>
   <a-assets>
     <audio id="pop-01-sound-asset" src="assets/pop-01-sound.mp3" preload="auto"></audio>
     <audio id="pop-02-sound-asset" src="assets/pop-02-sound.mp3" preload="auto"></audio>
@@ -340,13 +340,14 @@ const tapBusinessCardComponent = {
     }
   },
   tick: function () {
-    const parent = document.getElementById('parent-entity').object3D;
+    console.log('TEST');
+    /*const parent = document.getElementById('parent-entity').object3D;
     const camera = document.getElementById('camera-entity').object3D;
 
     parent.rotation.y = Math.atan2(
       camera.position.x - parent.position.x,
       camera.position.z - parent.position.z
-    );
+    );*/
   },
 };
 

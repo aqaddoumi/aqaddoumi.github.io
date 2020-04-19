@@ -221,7 +221,7 @@ const tapBusinessCardComponent = {
       const parentObj = document.getElementById('parent-entity').object3D;
       //console.log(parent.position.x);
       const camera = document.getElementById('camera-entity').object3D;
-      parent.rotation.y = Math.atan2(
+      parentObj.rotation.y = Math.atan2(
         camera.position.x - parentObj.position.x,
         camera.position.z - parentObj.position.z
       );

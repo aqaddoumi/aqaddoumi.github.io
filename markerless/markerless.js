@@ -28,7 +28,7 @@ const xrScene = `
     <a-asset-item id="for-sale-model-asset" src="assets/for-sale-model.glb"></a-asset-item>
     <video id="talk-video-asset" muted autoplay playsinline crossorigin="anonymous" src="assets/talk-video.mp4"></video>
   </a-assets>
-  <a-camera id="camera-entity" position="0 0 0" raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse;"></a-camera>
+  <a-camera id="camera-entity" position="1 0 0" raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse;"></a-camera>
   <a-box id="ground" class="cantap" scale="1000 2 1000" position="0 -1 0" material="shader: shadow; transparent: true; opacity: 0.4" shadow></a-box>
 </a-scene>
 `;

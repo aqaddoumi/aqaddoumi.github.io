@@ -214,21 +214,6 @@ const tapBusinessCardComponent = {
     ground.addEventListener('click', (event) => {
       const touchPoint = event.detail.intersection.point;
       parentEl.setAttribute('position', touchPoint);
-      //console.log(parent.object3D.rotation.y);
-      /*const camera = document.getElementById('camera-entity').object3D;
-      console.log('X: ' + camera.position.x);
-      console.log('Y: ' + camera.position.y);
-      console.log('Z: ' + camera.position.z);*/
-
-      const parentObj = document.getElementById('parent-entity').object3D;
-      //console.log(parent.position.x);
-      const camera = document.getElementById('camera-entity').object3D;
-      parentObj.rotation.y = Math.atan2(
-        camera.position.x - parentObj.position.x,
-        camera.position.z - parentObj.position.z
-      );
-
-      console.log('Y: ' + parentObj.rotation.y);
 
       if (!hasUserTapped) {
         hasUserTapped = true;
@@ -355,17 +340,14 @@ const tapBusinessCardComponent = {
     }
   },
   tick: function () {
-    /*const ground = document.getElementById('ground');
-    ground.addEventListener('click', (event) => {
+    const parentObj = document.getElementById('parent-entity').object3D;
+    const camera = document.getElementById('camera-entity').object3D;
+    parentObj.rotation.y = Math.atan2(
+      camera.position.x - parentObj.position.x,
+      camera.position.z - parentObj.position.z
+    );
 
-    }*/
-    //const parent = document.getElementById('parent-entity').object3D;
-    //console.log(parent.position.x);
-    //const camera = document.getElementById('camera-entity').object3D;
-    /*parent.rotation.y = Math.atan2(
-      camera.position.x - parent.position.x,
-      camera.position.z - parent.position.z
-    );*/
+    //console.log('Y: ' + parentObj.rotation.y);
   },
 };
 

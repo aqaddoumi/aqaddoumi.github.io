@@ -226,7 +226,7 @@ const tapBusinessCardComponent = {
         camera.position.z - parentObj.position.z
       );
 
-      console(parentObj.rotation.y);
+      console.log(parentObj.rotation.y);
 
       const touchPoint = event.detail.intersection.point;
       parentEl.setAttribute('position', touchPoint);

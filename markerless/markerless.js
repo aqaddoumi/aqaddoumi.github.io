@@ -212,6 +212,8 @@ const tapBusinessCardComponent = {
 
     const ground = document.getElementById('ground');
     ground.addEventListener('click', (event) => {
+      const touchPoint = event.detail.intersection.point;
+      parentEl.setAttribute('position', touchPoint);
       //console.log(parent.object3D.rotation.y);
       /*const camera = document.getElementById('camera-entity').object3D;
       console.log('X: ' + camera.position.x);
@@ -226,10 +228,7 @@ const tapBusinessCardComponent = {
         camera.position.z - parentObj.position.z
       );
 
-      console.log(parentObj.rotation.y);
-
-      const touchPoint = event.detail.intersection.point;
-      parentEl.setAttribute('position', touchPoint);
+      console.log('Y: ' + parentObj.rotation.y);
 
       if (!hasUserTapped) {
         hasUserTapped = true;

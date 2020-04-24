@@ -9,11 +9,15 @@
   <body>
     <a-scene background="color: #FAFAFA">
       <a-assets>
-        <a-asset-item id="crate-obj" src="assets/tray/tray.obj"></a-asset-item>
-        <a-asset-item id="crate-mtl" src="assets/tray/tray.mtl"></a-asset-item>
+        <a-asset-item id="tray" src="assets/tray-model.glb"></a-asset-item>
       </a-assets>
       <a-camera id="scene-camera" position="0 0 0"></a-camera>
-      <a-obj-model src="#crate-obj"></a-obj-model>
+      <a-entity light="type: ambient; color: #CCC"></a-entity>
+      <a-entity
+        gltf-model="#tray"
+        position="0 0 -5"
+        scale="0.1 0.1 0.1"
+      ></a-entity>
     </a-scene>
   </body>
 </html>

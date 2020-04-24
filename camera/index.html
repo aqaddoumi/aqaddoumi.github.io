@@ -9,14 +9,18 @@
   <body>
     <a-scene background="color: #FAFAFA">
       <a-assets>
-        <a-asset-item id="tray" src="assets/tray-model.glb"></a-asset-item>
+        <a-asset-item
+          id="crate-obj"
+          src="assets/Antique_Serving_Silver_Tray_obj/Antique_Serving_Silver_Tray_convert
+        .obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="crate-mtl"
+          src="assets/Antique_Serving_Silver_Tray_obj/Antique_Serving_Silver_Tray_convert/Antique_Serving_Silver_Tray_convert.mtl"
+        ></a-asset-item>
       </a-assets>
       <a-camera id="scene-camera" position="0 0 0"></a-camera>
-      <a-entity
-        gltf-model="#tray"
-        position="0 0 -5"
-        scale="0.1 0.1 0.1"
-      ></a-entity>
+      <a-obj-model src="#crate-obj" mtl="#crate-mtl"></a-obj-model>
     </a-scene>
   </body>
 </html>

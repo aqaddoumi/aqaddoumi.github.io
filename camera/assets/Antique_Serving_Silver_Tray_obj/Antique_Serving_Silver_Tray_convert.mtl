@@ -1,0 +1,22 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  Deep Exploration 6.5 x64 6.5.0.9182
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl Silver
+Ka 0.0196078 0.0196078 0.0196078
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 128
+map_Kd Silver_Tray_Dif.png
+map_bump Silver_Tray_Normal.png
+bump Silver_Tray_Normal.png
+map_opacity 
+map_d 
+refl 
+map_kS Silver_Tray_Refl.png
+map_kA 
+map_Ns 

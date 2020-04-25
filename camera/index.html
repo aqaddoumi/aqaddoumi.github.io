@@ -12,13 +12,14 @@
       <a-assets>
         <a-asset-item id="tray" src="assets/tray.glb"></a-asset-item>
       </a-assets>
-      <a-camera id="scene-camera" position="0 0 0" rotation="90 0 0"></a-camera>
+      <a-camera id="scene-camera" position="0 0 0" rotation="0 0 0"></a-camera>
       <a-entity light="type: ambient" intensity="10"></a-entity>
       <a-entity environment></a-entity>
       <a-entity
         gltf-model="#tray"
         position="0 0 -5"
         scale="0.1 0.1 0.1"
+        rotation="90 0 0"
       ></a-entity>
     </a-scene>
   </body>

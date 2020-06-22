@@ -1,3 +1,5 @@
-//document.getElementById("gift-model").components['gltf-model'].model.animations
-const gift = document.getElementById('gift');
-console.log(gift);
+AFRAME.registerComponent('gift', {
+  init: function () {
+    console.log('Hello, World!');
+  },
+});

@@ -12,6 +12,10 @@
     <a-scene background="color: #FAFAFA">
       <a-assets>
         <a-asset-item id="gift" src="assets/gift.glb"></a-asset-item>
+        <a-asset-item
+          id="animatedModel"
+          src="assets/mixamo-animated-lowpoly.glb"
+        ></a-asset-item>
       </a-assets>
       <a-gltf-model
         gift
@@ -22,6 +26,14 @@
         src="#gift"
         animation-mixer="clip: Take 001"
       ></a-gltf-model>
+
+      <a-entity
+        id="model"
+        gltf-model="#animatedModel"
+        scale="3 3 3"
+        animation-mixer="clip: idle; loop: repeat"
+      >
+      </a-entity>
 
       <a-plane
         position="0 0 -4"

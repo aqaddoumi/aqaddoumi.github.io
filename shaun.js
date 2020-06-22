@@ -1,5 +1,7 @@
 AFRAME.registerComponent('gift', {
   init: function () {
-    console.log('Hello, World!');
+    this.el.addEventListener('model-loaded', (e) => {
+      console.log(this.el.components['gltf-model'].model.animations);
+    });
   },
 });

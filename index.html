@@ -12,6 +12,7 @@
     <a-scene background="color: #FAFAFA">
       <a-assets>
         <a-asset-item id="gift" src="assets/gift/scene.gltf"></a-asset-item>
+        <a-asset-item id="cat" src="assets/cat/scene.gltf"></a-asset-item>
       </a-assets>
       <a-gltf-model
         gift
@@ -22,6 +23,18 @@
         src="#gift"
         animation-mixer
       ></a-gltf-model>
+
+      <a-gltf-model
+        gift
+        id="cat"
+        rotation="0 45 0"
+        position="0 0 -10"
+        scale="0.1 0.1 0.1"
+        src="#gift"
+        animation-mixer
+      ></a-gltf-model>
+
+      <a-text value="Happy Birthday Lily!"></a-text>
 
       <a-plane
         position="0 0 -4"

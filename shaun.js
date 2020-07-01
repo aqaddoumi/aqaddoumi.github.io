@@ -52,6 +52,10 @@ AFRAME.registerComponent('ar-experience', {
           'property: scale; dur: 500; delay: 200; to: 0.2 0.2 0.2;'
         );
       });
+
+      //const particles = document.getElementById('particles');
+      //particles.components['particle-system'].startParticles();
+      //particles.setAttribute('enabled', false);
     });
   },
 });

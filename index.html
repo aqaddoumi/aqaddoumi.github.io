@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
     <script src="shaun.js"></script>
   </head>
   <body>
@@ -26,6 +27,7 @@
         src="assets/gift/scene.gltf"
       ></a-asset-item>
       <a-asset-item id="cat-asset" src="assets/cat/scene.gltf"></a-asset-item>
+      <video id="vid-test" muted autoplay loop="true" src="assets/video/vid-test.mp4"></video>
       </a-assets>
 
       <a-box
@@ -35,14 +37,19 @@
       color="#bdbdbd"
     ></a-box>
 
+
+
       <a-entity id="container" scale="0.1 0.1 0.1">
+        <a-video src="#vid-test" width="16" height="9" position="0 10 0"></a-video>
+        <a-entity id="particles" particle-system="blending: 1; color: #FEF000; texture: assets/confetti/confetti-01.png; enabled: false"></a-entity>
+        <a-entity id="particles" particle-system="blending: 1; color: #32B744; texture: assets/confetti/confetti-01.png; enabled: false"></a-entity>
         <a-gltf-model
           id="cat-model"
           scale="0 0 0"
           animation-mixer
           src="#cat-asset"
         ></a-gltf-model>
-
+        <a-text scale="10 10 10" position="0 40 0" value="Happy Birthday!" color="red" align="center"></a-text>
         <a-gltf-model id="box" color="red" scale="1 1 1" model-opacity="1"
         animation__scale_one="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; autoplay: false"
 animation__scale_two="property: scale; from: 1 1 1; to: 0.5 0.5 0.5; dur: 500; autoplay: false"

@@ -1,5 +1,5 @@
 console.log('TEST');
 
 window.addEventListener('arjs-nft-loaded', function (e) {
-  alert('Loaded 3');
+  alert('Loaded 4');
 });

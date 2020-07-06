@@ -1,4 +1,16 @@
-alert('Test 0');
+AFRAME.registerComponent('happy-birthday-ar', {
+  init: function () {
+    const element = this.el;
+    const data = this.data;
+
+    this.addEventListener('markerFound', (e) => {
+      alert('FOUND');
+      const box = document.createElement('a-box');
+      box.setAttribute('color', 'red');
+      element.appendChild(box);
+    });
+  },
+});
 
 //console.log('TEST');
 

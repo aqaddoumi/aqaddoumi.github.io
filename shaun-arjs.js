@@ -4,7 +4,7 @@ AFRAME.registerComponent('happy-birthday-ar', {
     const data = this.data;
 
     element.addEventListener('markerFound', (e) => {
-      alert('FOUND');
+      alert('FOUND 1');
       const box = document.createElement('a-box');
       box.setAttribute('color', 'red');
       element.appendChild(box);

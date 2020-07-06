@@ -1,8 +1,10 @@
-console.log('TEST');
+alert('Test 0');
 
-window.addEventListener('arjs-nft-loaded', function (e) {
+//console.log('TEST');
+
+/*window.addEventListener('arjs-nft-loaded', function (e) {
   alert('Loaded 12');
-});
+});*/
 
 /*
 <!DOCTYPE html>

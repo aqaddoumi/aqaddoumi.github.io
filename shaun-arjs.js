@@ -21,10 +21,12 @@ AFRAME.registerComponent('model-opacity', {
 
 AFRAME.registerComponent('happy-birthday-ar', {
   init: function () {
+    alert('FOUND 2');
     const element = this.el;
     const data = this.data;
 
     element.addEventListener('markerFound', (e) => {
+      alert('FOUND 3');
       const giftElement = document.getElementById('box');
 
       giftElement.object3D.visible = true;
@@ -40,7 +42,6 @@ AFRAME.registerComponent('happy-birthday-ar', {
           'property: model-opacity; to: 0; dur: 500; delay: 500'
         );
       });
-      alert('FOUND 2');
     });
   },
 });

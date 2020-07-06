@@ -10,7 +10,11 @@
     });
   </script>
   <body style="margin: 0px; overflow: hidden;">
-    <a-scene embedded arjs>
+    <a-scene
+      embedded
+      arjs
+      renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;"
+    >
       <a-assets>
         <a-asset-item
           id="gift-asset"

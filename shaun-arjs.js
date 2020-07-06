@@ -21,13 +21,12 @@ AFRAME.registerComponent('model-opacity', {
 
 AFRAME.registerComponent('happy-birthday-ar', {
   init: function () {
-    alert('FOUND 2');
+    alert('FOUND 4');
     const element = this.el;
     const data = this.data;
 
     element.addEventListener('markerFound', (e) => {
-      alert('FOUND 3');
-      const giftElement = document.getElementById('box');
+      const giftElement = document.getElementById('gift-model');
 
       giftElement.object3D.visible = true;
       giftElement.setAttribute(

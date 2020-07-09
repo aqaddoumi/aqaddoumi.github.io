@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+  <script src="shaun-arjs.js"></script>
+  <body style="margin: 0px; overflow: hidden;">
+    <a-scene
+      happy-birthday-ar
+      embedded
+      arjs
+      renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;"
+    >
+      <a-assets>
+        <a-timeline id="gift-animation-timeline">
+          <a-timeline-animation
+            select="#gift-model"
+            name="scale_one"
+          ></a-timeline-animation>
+          <a-timeline-animation
+            select="#gift-model"
+            name="scale_two"
+          ></a-timeline-animation>
+          <a-timeline-animation
+            select="#gift-model"
+            name="scale_three"
+          ></a-timeline-animation>
+        </a-timeline>
+        <a-asset-item
+          id="gift-asset"
+          src="assets/gift/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item id="cat-asset" src="assets/cat/scene.gltf"></a-asset-item>
+        <video
+          id="birthday-video-asset"
+          muted
+          autoplay
+          loop="true"
+          src="assets/video/birthday-video.mp4"
+        ></video>
+      </a-assets>
+      <a-marker emitevents="true" preset="hiro">
+        <a-gltf-model
+          src="#gift-asset"
+          animation__scale_one="property: scale; from: 0 0 0; to: 0.1 0.1 0.1; dur: 5000; autoplay: false"
+          animation__scale_two="property: scale; from: 0.1 0.1 0.1; to: 0.05 0.05 0.05; dur: 5000; autoplay: false"
+          animation__scale_three="property: scale; from: 0.05 0.05 0.05; to: 0.1 0.1 0.1; dur: 5000; autoplay: false"
+          visible="false"
+          id="gift-model"
+          scale="0 0 0"
+          model-opacity="1"
+        ></a-gltf-model>
+
+        <a-gltf-model
+          src="#cat-asset"
+          visible="false"
+          id="cat-model"
+          scale="0 0 0"
+        ></a-gltf-model>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>

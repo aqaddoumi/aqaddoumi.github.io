@@ -1,5 +1,51 @@
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
+  }
+});
+
+AFRAME.registerComponent('model-opacity', {
+  schema: { default: 1.0 },
+  init: function () {
+    this.el.addEventListener('model-loaded', this.update.bind(this));
+  },
+  update: function () {
+    var mesh = this.el.getObject3D('mesh');
+    var data = this.data;
+    if (!mesh) {
+      return;
+    }
+    mesh.traverse(function (node) {
+      if (node.isMesh) {
+        node.material.opacity = data;
+        node.material.transparent = data < 1.0;
+        node.material.needsUpdate = true;
+      }
+    });
+  },
+});
+
+//Show Interface
+//Point Camera At QR Code
+//Hide Interface
+
+//Load Assets
+//Show Loading
+//Hide Loading
+
+//Show Gift
+//Hide Gift
+//Show Cat
+//Show Particles
+//Show Text
+//Hide Text
+//Show Video
+//Hide Video
+//Play Music
+//Tune Down Music
+//Play Pop Sound
+//Play Confetti Sound
+
+/*
     const scene = this.el.sceneEl;
     const element = this.el;
     const data = this.data;
@@ -378,42 +424,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         }, 800);
       }
     }
-  },
-});
-
-AFRAME.registerComponent('model-opacity', {
-  schema: { default: 1.0 },
-  init: function () {
-    this.el.addEventListener('model-loaded', this.update.bind(this));
-  },
-  update: function () {
-    var mesh = this.el.getObject3D('mesh');
-    var data = this.data;
-    if (!mesh) {
-      return;
-    }
-    mesh.traverse(function (node) {
-      if (node.isMesh) {
-        node.material.opacity = data;
-        node.material.transparent = data < 1.0;
-        node.material.needsUpdate = true;
-      }
-    });
-  },
-});
-
-//Gift Show
-
-//XXX Loading
-//XXX Video
-//XXX Music
-//XXX Models
-
-//Play Music
-//Turn Music Volume Down
-
-//Particles
-//Text
+  },*/
 
 /*<a-entity
 class="particles"

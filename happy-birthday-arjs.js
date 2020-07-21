@@ -10,19 +10,30 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     let didFindMarker = false;
     let didExperienceStart = false;
 
+    //Elements
+    const loadingEl = document.getElementById('loading');
+    //const giftEl = document.getElementById('gift-model');
+    //const catEl = document.getElementById('cat-model');
+    //const videoEl = document.getElementById('birthday-video');
+
+    //Loading Progress
+    let loadingAmount = 0;
+
     //Get Button
     const button = document.getElementById('start-button');
 
     //Listen to Button Click
     button.addEventListener('click', function() {
-      alert('click');
-      didUserTap = true;
-      hideInterface();
-      activateMedia();
-
-      if (didAssetsLoad && didFindMarker && !didExperienceStart) {
-        startExperience();
-      } 
+      if (!didUserTap) {
+        alert('click');
+        didUserTap = true;
+        hideInterface();
+        activateMedia();
+  
+        if (didAssetsLoad && didFindMarker && !didExperienceStart) {
+          startExperience();
+        } 
+      }
     })
 
     function hideInterface() {
@@ -43,10 +54,14 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Listen to Marker Found Event
     el.addEventListener('markerFound', (e) => {
-      alert('found 2');
-      didFindMarker = true;
-      if (didUserTap && didAssetsLoad && !didExperienceStart) {
-        startExperience();
+      if (!didFindMarker) {
+        alert('found 2');
+        didFindMarker = true;
+        if (didUserTap && didAssetsLoad && !didExperienceStart) {
+          startExperience();
+        } else if (didUserTap) {
+          showLoadingElement();
+        }
       }
     });
 
@@ -168,6 +183,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
       }
     }
 
+    //Change model asset into loaded in the assets array when loaded
     function modelAssetLoaded(id) {
       let model = assets.find((v) => v.type === 'model' && v.id === id);
       model.isLoaded = true;
@@ -176,7 +192,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Check if all Assets are loaded
     function areAllAssetsAreLoaded() {
-      let length = assets.length;
       let count = 0;
       for (let i = 0; i < assets.length; i++) {
         if (assets[i].isLoaded) {
@@ -184,19 +199,94 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         }
       }
 
-      if (count === length) {
+      if (count === assets.length) {
         if (!didAssetsLoad) {
+          alert('assets load');
           didAssetsLoad = true;
-
-          if (didUserTap) {
-            if (!didExperienceStart) {
-              if (didFindMarker) {
-                startExperience();
-              }
-            }
+          if (didUserTap && didFindMarker && !didExperienceStart) {
+            startExperience();
           }
         }
+      } else {
+        loadingAmount = count / assets.length;
+        updateLoadingProgress();
       }
+    }
+
+    //Start Experience
+    function startExperience() {
+      if (!didExperienceStart) {
+        didExperienceStart = true;
+        hideLoadingElement();
+      }
+    }
+
+    //Loading
+    function showLoadingElement() {
+      loadingEl.setAttribute('color', 'white');
+      loadingEl.setAttribute('value', `${loadingAmount}%`);
+      loadingEl.setAttribute('align', 'center');
+      loadingEl.object3D.translateY(0.5);
+      loadingEl.setAttribute('visible', true);
+    }
+
+    function hideLoadingElement() {
+      loadingEl.setAttribute('visible', false);
+    }
+
+    function updateLoadingProgress() {
+      loadingEl.setAttribute('value', `${loadingAmount}%`);
+    }
+
+    //Gift
+    function showGiftModel() {
+
+    }
+
+    function hideGiftModel() {
+
+    }
+
+    //Cat
+    function showCatModel() {
+
+    }
+
+    //Particles
+    function startParticles() {
+
+    }
+
+    //Text
+    function showBirthdayText() {
+
+    }
+
+    //Birthday Video
+    function showBirthdayVideo() {
+
+    }
+
+    function hideBirthdayVideo() {
+
+    }
+
+    //Birthday Music
+    function startBirthdayMusic() {
+
+    }
+
+    function tuneDownBackgroundMusic() {
+
+    }
+
+    //Audio
+    function playPopAudio() {
+
+    }
+
+    function playConfettiAudio() {
+
     }
   }
 });
@@ -224,14 +314,14 @@ AFRAME.registerComponent('model-opacity', {
 
 //XXX Show Interface
 //XXX Point Camera At QR Code
-//Hide Interface
-//Activate Media
+//XXX Hide Interface
+//XXX Activate Media
 
-//Load Assets
+//XXX Load Assets
 //Show Loading
-//Hide Loading
+//XXX Hide Loading
 
-//Start Experience
+//XXX Start Experience
 
 //Show Gift
 //Hide Gift
@@ -246,60 +336,12 @@ AFRAME.registerComponent('model-opacity', {
 //Play Pop Sound
 //Play Confetti Sound
 
+//Barcode
+
 /*
-    const scene = this.el.sceneEl;
-    const element = this.el;
-    const data = this.data;
 
-    var didUserTap = false;
-    var didAssetsLoad = false;
-    var didExperienceStart = false;
 
-    let loadingAmount = 0;
 
-    let assets = [];
-
-    initializeLoadingElement();
-
-    addVideoAssets();
-    addAudioAssets();
-    addModelAssets();
-
-    loadVideoAssets();
-    loadAudioAssets();
-    loadModelAssets();
-
-    const loadingElement = document.createElement('a-text');
-    const giftElement = document.getElementById('gift-model');
-    const catElement = document.getElementById('cat-model');
-    const videoElement = document.getElementById('birthday-video');
-
-    const ground = document.getElementById('ground');
-    ground.addEventListener('click', function (e) {
-      if (!didUserTap) {
-        didUserTap = true;
-
-        const touchPoint = event.detail.intersection.point;
-        const container = document.getElementById('container');
-        container.setAttribute('position', touchPoint);
-
-        activateMedia();
-
-        if (didAssetsLoad) {
-          if (!didExperienceStart) {
-            startExperience();
-          }
-        }
-      }
-    });
-
-    function initializeLoadingElement() {
-      loadingElement.setAttribute('color', 'white');
-      loadingElement.setAttribute('value', `${loadingAmount}%`);
-      loadingElement.setAttribute('align', 'center');
-      loadingElement.object3D.translateY(0.5);
-      scene.appendChild(loadingElement);
-    }
 
     function startExperience() {
       didExperienceStart = true;
@@ -309,150 +351,6 @@ AFRAME.registerComponent('model-opacity', {
       startBackgroundMusic();
     }
 
-    function areAllAssetsAreLoaded() {
-      let length = assets.length;
-      let count = 0;
-      for (let i = 0; i < assets.length; i++) {
-        if (assets[i].isLoaded) {
-          count++;
-        }
-      }
-
-      if (count === length) {
-        if (!didAssetsLoad) {
-          didAssetsLoad = true;
-
-          if (didUserTap) {
-            if (!didExperienceStart) {
-              startExperience();
-            }
-          }
-        }
-      }
-    }
-
-    function videoAssetLoaded(id) {
-      let video = assets.find((v) => v.type === 'video' && v.id === id);
-      video.isLoaded = true;
-      areAllAssetsAreLoaded();
-    }
-
-    function audioAssetLoaded(id) {
-      let audio = assets.find((v) => v.type === 'audio' && v.id === id);
-      audio.isLoaded = true;
-      areAllAssetsAreLoaded();
-    }
-
-    function modelAssetLoaded(id) {
-      let model = assets.find((v) => v.type === 'model' && v.id === id);
-      model.isLoaded = true;
-      areAllAssetsAreLoaded();
-    }
-
-    function addVideoAssets() {
-      const videoAssets = scene.querySelectorAll('video');
-      for (let i = 0; i < videoAssets.length; i++) {
-        let v = {};
-        v.type = 'video';
-        v.id = videoAssets[i].id;
-        v.asset = videoAssets[i];
-        v.isLoaded = false;
-        assets.push(v);
-      }
-    }
-
-    function addAudioAssets() {
-      const audioAssets = scene.querySelectorAll('audio');
-      for (let i = 0; i < audioAssets.length; i++) {
-        let a = {};
-        a.type = 'audio';
-        a.id = audioAssets[i].id;
-        a.asset = audioAssets[i];
-        a.isLoaded = false;
-        assets.push(a);
-      }
-    }
-
-    function addModelAssets() {
-      const modelAssets = document.getElementsByClassName('model');
-      for (let i = 0; i < modelAssets.length; i++) {
-        let m = {};
-        m.type = 'model';
-        m.id = modelAssets[i].id;
-        m.asset = modelAssets[i];
-        m.isLoaded = false;
-        assets.push(m);
-      }
-    }
-
-    function loadVideoAssets() {
-      for (let i = 0; i < assets.length; i++) {
-        const a = assets[i];
-        if (a.type === 'video') {
-          if (!a.isLoaded) {
-            if (a.asset.readyState > 3) {
-              videoAssetLoaded(a.id);
-            } else {
-              a.asset.oncanplaythrough = function () {
-                videoAssetLoaded(a.id);
-              };
-            }
-          }
-        }
-      }
-    }
-
-    function loadAudioAssets() {
-      for (let i = 0; i < assets.length; i++) {
-        const a = assets[i];
-        if (a.type === 'audio') {
-          if (!a.isLoaded) {
-            if (a.asset.readyState > 3) {
-              audioAssetLoaded(a.id);
-            } else {
-              a.asset.oncanplaythrough = function () {
-                audioAssetLoaded(a.id);
-              };
-            }
-          }
-        }
-      }
-    }
-
-    function loadModelAssets() {
-      for (let i = 0; i < assets.length; i++) {
-        const a = assets[i];
-        if (a.type === 'model') {
-          if (!a.isLoaded) {
-            if (a.asset.hasLoaded) {
-              modelAssetLoaded(a.id);
-            } else {
-              a.asset.addEventListener('loaded', () => {
-                modelAssetLoaded(a.id);
-              });
-            }
-          }
-        }
-      }
-    }
-
-    function activateMedia() {
-      for (let i = 0; i < assets.length; i++) {
-        const a = assets[i];
-        if (a.type === 'video' || a.type === 'audio') {
-          a.asset.play();
-          a.asset.pause();
-        }
-      }
-    }
-
-    function showLoadingElement() {
-
-    }
-
-    function hideLoadingElement() {
-      
-    }
 
     function showGiftModel() {
       giftElement.object3D.visible = true;

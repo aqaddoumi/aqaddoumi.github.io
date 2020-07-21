@@ -218,8 +218,8 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         didExperienceStart = true;
         hideLoadingElement();
         showGiftModel();
-        //playPopSound();
-        //startBackgroundMusic();
+        playPopSound();
+        startBackgroundMusic();
       }
     }
 
@@ -257,6 +257,39 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         //showBirthdayVideo();
         //tuneDownBackgroundMusic();
       });
+    }
+
+    //Birthday Music
+    function startBirthdayMusic() {
+      const musicAsset = document.getElementById(
+        'background-music-audio-asset'
+      );
+      musicAsset.currentTime = 0;
+      musicAsset.volume = 0;
+      musicAsset.play();
+
+      let vol = 0;
+      let interval = 200;
+
+      var fadeInMusic = setInterval(function () {
+        if (vol < 1) {
+          vol += 0.05;
+          if (vol > 1) {
+            vol = 1;
+          }
+          musicAsset.volume = vol;
+        } else {
+          clearInterval(fadeInMusic);
+        }
+      }, interval);
+    }
+
+    //Audio
+    function playPopAudio() {
+      const audioAsset = document.getElementById('pop-sound-audio-asset');
+      audioAsset.currentTime = 0;
+      audioAsset.volume = 1;
+      audioAsset.play();
     }
   }
 });

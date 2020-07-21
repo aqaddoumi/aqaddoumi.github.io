@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+    <script src="happy-birthday-arjs.js"></script>
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"/>
+
+    <body style="margin : 0px; overflow: hidden;">
+      <div id="interface-container">
+        <div class="container-fluid" style="height: 100%;">
+          <div class="row justify-content-center align-items-center" style="height: 20%;">
+            <div class="col-10">
+              <h3 class="text-center" style="color: white">
+                Pointt Device at QR Code
+              </h3>
+            </div>
+          </div>
+
+          <div class="row justify-content-center align-items-center" style="height: 60%;"></div>
+
+          <div class="row justify-content-center align-items-center" style="height: 20%; z-index: 11;">
+            <button type="button" id="start-button" class="btn btn-primary">Got It</button>
+          </div>
+        </div>
+      </div>
+
+      <a-scene
+      happy-birthday-arjs
+      embedded
+      arjs
+      renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;">
+        <a-assets timeout="10">
+          <a-asset-item class="model" id="gift-asset" src="./assets/models/gift/scene.gltf"></a-asset-item>
+          <a-asset-item class="model" id="cat-asset" src="./assets/models/cat/scene.gltf"></a-asset-item>
+          <video id="birthday-video-asset" muted autoplay loop="true" src="./assets/videos/birthday-video.mp4"></video>
+          <audio id="background-music-audio-asset" src="./assets/audios/background-music.mp3"></audio>
+          <audio id="pop-sound-audio-asset" src="./assets/audios/pop-sound.mp3"></audio>
+          <audio id="confetti-sound-audio-asset" src="./assets/audios/confetti-sound.wav"></audio>
+        </a-assets>
+        
+        <a-timeline id="gift-animation-timeline">
+          <a-timeline-animation select="#gift-model" name="gift_01"></a-timeline-animation>
+          <a-timeline-animation select="#gift-model" name="gift_02"></a-timeline-animation>
+          <a-timeline-animation select="#gift-model" name="gift_03"></a-timeline-animation>
+          <a-timeline-animation select="#gift-model" name="gift_04"></a-timeline-animation>
+        </a-timeline>
+
+        <a-timeline id="text-01-animation-timeline">
+          <a-timeline-animation select="#text-01" name="text_01_scale_up"></a-timeline-animation>
+          <a-timeline-animation select="#text-01" name="text_01_still"></a-timeline-animation>
+          <a-timeline-animation select="#text-01" name="text_01_scale_down"></a-timeline-animation>
+        </a-timeline>
+
+        <a-timeline id="text-02-animation-timeline">
+          <a-timeline-animation select="#text-02" name="text_02_scale_up"></a-timeline-animation>
+          <a-timeline-animation select="#text-02" name="text_02_still"></a-timeline-animation>
+          <a-timeline-animation select="#text-02" name="text_02_scale_down"></a-timeline-animation>
+        </a-timeline>
+  
+        <a-timeline id="text-03-animation-timeline">
+          <a-timeline-animation select="#text-03" name="text_03_scale_up"></a-timeline-animation>
+          <a-timeline-animation select="#text-03" name="text_03_still"></a-timeline-animation>
+          <a-timeline-animation select="#text-03" name="text_03_scale_down"></a-timeline-animation>
+        </a-timeline>
+  
+        <a-timeline id="text-04-animation-timeline">
+          <a-timeline-animation select="#text-04" name="text_04_scale_up"></a-timeline-animation>
+          <a-timeline-animation select="#text-04" name="text_04_still"></a-timeline-animation>
+          <a-timeline-animation select="#text-04" name="text_04_scale_down"></a-timeline-animation>
+        </a-timeline>
+      
+        <a-marker emitevents="true" preset="hiro">
+          <a-text id="loading" visible="false"></a-text>
+
+          <a-gltf-model visible="false" src="#gift-asset" id="gift-model" model-opacity="1" scale="0 0 0"
+          animation__gift_01="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; autoplay: false; easing: easeInOutQuint"
+          animation__gift_02="property: scale; from: 1 1 1; to: 1.2 0.6 1.2; dur: 500; autoplay: false; easing: easeInOutQuint;"
+          animation__gift_03="property: scale; from: 1.2 0.6 1.2; to: 0.6 1.2 0.6; dur: 500; autoplay: false; easing: easeInOutQuint"
+          animation__gift_04="property: scale; from: 0.6 1.2 0.6; to: 1 0.6 1; dur: 250; autoplay: false; easing: easeInOutQuint"
+          ></a-gltf-model>
+
+          <a-gltf-model visible="false" src="#cat-asset" id="cat-model" animation-mixer scale="0 0 0"></a-gltf-model>
+
+          <a-entity>
+            <a-entity class="particles" particle-system="size: 0.3; velocityValue: 0 35 0; accelerationSpread: 2 0 2; blending: 1; color: #FEF000; texture: assets/images/confetti/confetti-01.png; enabled: false;"></a-entity>
+            <a-entity class="particles" particle-system="size: 0.3; velocityValue: 0 35 0; accelerationSpread: 2 0 2; blending: 1; color: #38A7F8; texture: assets/images/confetti/confetti-02.png; enabled: false;"></a-entity>
+            <a-entity class="particles" particle-system="size: 0.3; velocityValue: 0 35 0; accelerationSpread: 2 0 2; blending: 1; color: #FF1614; texture: assets/images/confetti/confetti-03.png; enabled: false;"></a-entity>
+            <a-entity class="particles" particle-system="size: 0.3; velocityValue: 0 35 0; accelerationSpread: 2 0 2; blending: 1; color: #8A5EA8; texture: assets/images/confetti/confetti-04.png; enabled: false;"></a-entity>
+            <a-entity class="particles" particle-system="size: 0.3; velocityValue: 0 35 0; accelerationSpread: 2 0 2; blending: 1; color: #32B744; texture: assets/images/confetti/confetti-05.png; enabled: false;"></a-entity>
+          </a-entity>
+
+          <a-entity position="0 12 0">
+            <a-entity 
+              visible="false" id="text-01" scale="0 0 0" text="align: center; value:Happy Birthday, ; color:#32B744; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/kalam/Kalam-Bold.json;" position="0 21 0"
+              animation__text_01_scale_up="property: scale; from: 0 0 0; to: 100 100 100; dur: 500; autoplay: false; easing: easeInOutQuint"
+              animation__text_01_still="property: scale; from: 100 100 100; to: 100 100 100; dur: 3000; autoplay: false; easing: easeInOutQuint"
+              animation__text_01_scale_down="property: scale; from: 100 100 100; to: 0 0 0; dur: 500;  autoplay: false; easing: easeInOutQuint;"
+            ></a-entity>
+            <a-entity
+              visible="false" id="text-02" scale="0 0 0" text="align: center; value:Lily!; color:#38A7F8; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/kalam/Kalam-Bold.json;" position="0 14 0"
+              animation__text_02_scale_up="property: scale; from: 0 0 0; to: 100 100 100; dur: 500; autoplay: false; easing: easeInOutQuint"
+              animation__text_02_still="property: scale; from: 100 100 100; to: 100 100 100; dur: 3000; autoplay: false; easing: easeInOutQuint"
+              animation__text_02_scale_down="property: scale; from: 100 100 100; to: 0 0 0; dur: 500;  autoplay: false; easing: easeInOutQuint;"
+            ></a-entity>
+            <a-entity
+              visible="false" id="text-03" scale="0 0 0" text="align: center; value:Love,; color:#FF1614; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/kalam/Kalam-Bold.json;" position="0 7 0"
+              animation__text_03_scale_up="property: scale; from: 0 0 0; to: 100 100 100; dur: 500; autoplay: false; easing: easeInOutQuint"
+              animation__text_03_still="property: scale; from: 100 100 100; to: 100 100 100; dur: 3000; autoplay: false; easing: easeInOutQuint"
+              animation__text_03_scale_down="property: scale; from: 100 100 100; to: 0 0 0; dur: 500;  autoplay: false; easing: easeInOutQuint;"
+            ></a-entity>
+            <a-entity
+              visible="false" id="text-04" scale="0 0 0" text="align: center; value:Shaun; color:#8A5EA8; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/kalam/Kalam-Bold.json;" position="0 0 0"
+              animation__text_04_scale_up="property: scale; from: 0 0 0; to: 100 100 100; dur: 500; autoplay: false; easing: easeInOutQuint"
+              animation__text_04_still="property: scale; from: 100 100 100; to: 100 100 100; dur: 3000; autoplay: false; easing: easeInOutQuint"
+              animation__text_04_scale_down="property: scale; from: 100 100 100; to: 0 0 0; dur: 500;  autoplay: false; easing: easeInOutQuint;"
+            ></a-entity>
+          </a-entity>
+
+          <a-video id="birthday-video" position="0 30 0" width="7.2" height="12.8" scale="0 0 0" src="#birthday-video-asset" visible="false"></a-video>
+        </a-marker>
+        <a-entity camera></a-entity>
+      </a-scene>
+
+      <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+      <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+      <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+    </body>
+</html>

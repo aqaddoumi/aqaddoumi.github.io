@@ -1,6 +1,5 @@
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
-    alert('1');
     //Get Element and scene
     const el = this.el;
     const scene = this.el.sceneEl;
@@ -13,9 +12,9 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Elements
     const loadingEl = document.getElementById('loading');
-    //const giftEl = document.getElementById('gift-model');
-    //const catEl = document.getElementById('cat-model');
-    //const videoEl = document.getElementById('birthday-video');
+    const giftEl = document.getElementById('gift-model');
+    const catEl = document.getElementById('cat-model');
+    const videoEl = document.getElementById('birthday-video');
 
     //Loading Progress
     let loadingAmount = 0;
@@ -27,7 +26,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     //Listen to Button Click
     button.addEventListener('click', function() {
       if (!didUserTap) {
-        alert('click');
         didUserTap = true;
         hideInterface();
         activateMedia();
@@ -57,7 +55,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     //Listen to Marker Found Event
     el.addEventListener('markerFound', (e) => {
       if (!didFindMarker) {
-        alert('found 2');
         didFindMarker = true;
         if (didUserTap && didAssetsLoad && !didExperienceStart) {
           startExperience();
@@ -203,7 +200,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
       if (count === assets.length) {
         if (!didAssetsLoad) {
-          alert('assets load');
           didAssetsLoad = true;
           if (didUserTap && didFindMarker && !didExperienceStart) {
             startExperience();
@@ -220,9 +216,9 @@ AFRAME.registerComponent('happy-birthday-arjs', {
       if (!didExperienceStart) {
         didExperienceStart = true;
         hideLoadingElement();
-        //showGiftModel();
-        //playPopSound();
-        //startBackgroundMusic();
+        showGiftModel();
+        playPopSound();
+        startBackgroundMusic();
       }
     }
 
@@ -245,25 +241,25 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Gift
     function showGiftModel() {
-      /*giftElement.object3D.visible = true;
+      giftElement.object3D.visible = true;
       giftElement.setAttribute(
         'animation-timeline',
         'timeline: #gift-animation-timeline; loop:false;'
       );
       giftElement.addEventListener('animationtimelinecomplete', function () {
         hideGiftModel();
-        //playConfettiSound();
+        playConfettiSound();
 
-        //startParticles();
-        //showCatModel();
-        //showHappyBirthdayText();
-        //showBirthdayVideo();
-        //tuneDownBackgroundMusic();
-      });*/
+        startParticles();
+        showCatModel();
+        showHappyBirthdayText();
+        showBirthdayVideo();
+        tuneDownBackgroundMusic();
+      });
     }
 
     function hideGiftModel() {
-      /*giftElement.setAttribute('animation-mixer', 'loop: pingpong');
+      giftElement.setAttribute('animation-mixer', 'loop: pingpong');
       giftElement.setAttribute(
         'animation__opacity',
         'property: model-opacity; to: 0; dur: 500; delay: 500'
@@ -271,21 +267,21 @@ AFRAME.registerComponent('happy-birthday-arjs', {
       giftElement.setAttribute(
         'animation__scale',
         'property: scale; to: 1 1 1; dur: 500;'
-      );*/
+      );
     }
 
     //Cat
     function showCatModel() {
-      /*catElement.object3D.visible = true;
+      catElement.object3D.visible = true;
       catElement.setAttribute(
         'animation',
         'property: scale; to: 0.1 0.1 0.1; dur: 500; delay: 500'
-      );*/ 
+      );
     }
 
     //Particles
     function startParticles() {
-      /*const particles = document.getElementsByClassName('particles');
+      const particles = document.getElementsByClassName('particles');
       for (const p of particles) {
         setTimeout(function () {
           p.components['particle-system'].startParticles();
@@ -293,12 +289,12 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         setTimeout(function () {
           p.components['particle-system'].stopParticles();
         }, 800);
-      }*/
+      }
     }
 
     //Text
     function showBirthdayText() {
-      /*const text01 = document.getElementById('text-01');
+      const text01 = document.getElementById('text-01');
       const text02 = document.getElementById('text-02');
       const text03 = document.getElementById('text-03');
       const text04 = document.getElementById('text-04');
@@ -331,12 +327,12 @@ AFRAME.registerComponent('happy-birthday-arjs', {
           'animation-timeline',
           'timeline: #text-04-animation-timeline; loop:false;'
         );
-      }, 750);*/
+      }, 750);
     }
 
     //Birthday Video
     function showBirthdayVideo() {
-      /*setTimeout(function () {
+      setTimeout(function () {
         videoElement.object3D.visible = true;
         const videoAsset = document.getElementById('birthday-video-asset');
         videoAsset.play();
@@ -352,19 +348,19 @@ AFRAME.registerComponent('happy-birthday-arjs', {
           'property: scale; to: 2 2 2; dur: 500;'
         );
         
-      }, 6000);*/
+      }, 6000);
     }
 
     function hideBirthdayVideo() {
-      /*videoElement.setAttribute(
+      videoElement.setAttribute(
         'animation',
         'property: scale; to: 0 0 0; dur: 500;'
-      );*/
+      );
     }
 
     //Birthday Music
     function startBirthdayMusic() {
-      /*const musicAsset = document.getElementById(
+      const musicAsset = document.getElementById(
         'background-music-audio-asset'
       );
       musicAsset.currentTime = 0;
@@ -384,11 +380,11 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         } else {
           clearInterval(fadeInMusic);
         }
-      }, interval);*/
+      }, interval);
     }
 
     function tuneDownBirthdayMusic() {
-      /*const musicAsset = document.getElementById(
+      const musicAsset = document.getElementById(
         'background-music-audio-asset'
       );
       musicAsset.volume = 1;
@@ -407,26 +403,26 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         } else {
           clearInterval(fadeOutMusic);
         }
-      }, interval);*/
+      }, interval);
     }
 
     //Audio
     function playPopAudio() {
-      /*const audioAsset = document.getElementById('pop-sound-audio-asset');
+      const audioAsset = document.getElementById('pop-sound-audio-asset');
       audioAsset.currentTime = 0;
       audioAsset.volume = 1;
-      audioAsset.play();*/
+      audioAsset.play();
     }
 
     function playConfettiAudio() {
-      /*setTimeout(function () {
+      setTimeout(function () {
         const audioAsset = document.getElementById(
           'confetti-sound-audio-asset'
         );
         audioAsset.currentTime = 0;
         audioAsset.volume = 1;
         audioAsset.play();
-      }, 250);*/
+      }, 250);
     }
   }
 });

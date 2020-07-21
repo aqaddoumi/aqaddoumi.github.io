@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <a-scene happy-birthday-arjs embedded arjs renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;">
+    <a-scene happy-birthday-arjs embedded arjs renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;" vr-mode-ui="enabled: false;">
       <a-assets timeout="10">
         <a-asset-item class="model" id="gift-asset" src="./assets/models/gift/scene.gltf"></a-asset-item>
         <a-asset-item class="model" id="cat-asset" src="./assets/models/cat/scene.gltf"></a-asset-item>
@@ -46,7 +46,9 @@
         <a-box id="box" color="red" visible="false"></a-box>
       </a-marker>
 
-      </a-scene>
+      <a-entity camera position="0 0 0"></a-entity>
+
+    </a-scene>
 
       <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

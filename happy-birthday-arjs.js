@@ -1,5 +1,6 @@
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
+    alert('1');
     //Get Element and scene
     const el = this.el;
     const sceneEl = this.el.sceneEl;
@@ -544,182 +545,6 @@ particle-system="size: 0.3; velocityValue: 0 35 0; maxParticleCount: 500; maxAge
 ></a-entity>*/
 
 
-/*AFRAME.registerComponent('happy-birthday-arjs', {
-  init: function () {
-    assets = {
-      giftModelAsset: {
-        type: 'model',
-        url: './assets/models/gift/scene.gltf'
-      },
-      catModelAsset: {
-        type: 'model',
-        url: './assets/models/cat/scene.gltf'
-      },
-      birthdayVideoAsset: {
-        type: 'video',
-        url: './assets/videos/birthday-video.mp4'
-      },
-      birthdayAudioAsset: {
-        type: 'audio',
-        url: './assets/audios/background-music.mp3'
-      },
-      popAudioAsset: {
-        type: 'audio',
-        url: './assets/audios/pop-sound.mp3'
-      },
-      confettiAudioAsset: {
-        type: 'audio',
-        url: './assets/audios/confetti-sound.wav'
-      }
-    }
-
-    let numberOfTotalAssets = 0;
-    let numberOfLoadedAssets = 0;
-
-    var didUserTap = false;
-    var didAssetsLoad = false;
-    var didExperienceStart = false;
-
-    const giftEl = document.getElementById('gift-model');
-    const catEl = document.getElementById('cat-model');
-    const videoEl = document.getElementById('birthday-video');
-
-    let modelLoader = new THREE.GLTFLoader();
-
-    initializeLoadingElement();
-    loadAssets();
-
-    function initializeLoadingElement() {
-      //const loadingTextEl = document.createElement('a-text');
-
-      //loadingTextEl.setAttribute('color', 'white');
-      //loadingTextEl.setAttribute('value', `${loadingAmount}%`);
-      //loadingTextEl.setAttribute('align', 'center');
-      //loadingTextEl.object3D.translateY(0.5);
-      //loadingEl.appendChild(loadingTextEl);
-    }
-
-    function loadAssets() {
-      for (const [key, value] of Object.entries(assets)) {
-        numberOfTotalAssets++;
-        if (value.type == 'model') {
-          loadModelAsset(key, value);
-        } else if (value.type == 'video') {
-          loadVideoAsset(key, value);
-        } else if (value.type == 'audio') {
-          loadAudioAsset(key, value);
-        }
-      }
-    }
-
-    function loadModelAsset(key, value) {
-      assets[key].isLoaded = false;
-      modelLoader.load(value.url, function (modelAsset) {
-        if (!assets[key].isLoaded) {
-          loadAsset(key, modelAsset);
-        }
-      });
-    }
-
-    function loadVideoAsset(key, value) {
-      assets[key].isLoaded = false;
-      const videoAsset = document.createElement('video');
-      videoAsset.setAttribute('id', key);
-      videoAsset.setAttribute('crossorigin', 'anonymous');
-      videoAsset.setAttribute('src', value.url);
-      videoAsset.setAttribute('playsinline', '');
-      document.body.appendChild(videoAsset);
-      videoAsset.oncanplaythrough = function () {
-        if (!assets[key].isLoaded) {
-          loadAsset(key, videoAsset);
-        }
-      };
-      if (!assets[key].isLoaded) {
-        if (videoAsset.readyState > 3) {
-          loadAsset(key, videoAsset);
-        }
-      }
-    }
-
-    function loadAudioAsset(key, value) {
-      assets[key].isLoaded = false;
-      const audioAsset = document.createElement('audio');
-      audioAsset.setAttribute('id', key);
-      audioAsset.setAttribute('crossorigin', 'anonymous');
-      audioAsset.setAttribute('src', value.url);
-      document.body.appendChild(audioAsset);
-      audioAsset.oncanplaythrough = function () {
-        if (!assets[key].isLoaded) {
-          loadAsset(key, audioAsset);
-        }
-      };
-      if (!assets[key].isLoaded) {
-        if (audioAsset.readyState > 3) {
-          loadAsset(key, audioAsset);
-        }
-      }
-    }
-
-    function loadAsset(key, asset) {
-      assets[key].isLoaded = true;
-      assets[key].asset = asset;
-      numberOfLoadedAssets++;
-      onAssetLoaded();
-    }
-
-    function onAssetLoaded() {
-      if (!didAssetsLoad) {
-        if (numberOfLoadedAssets === numberOfTotalAssets) {
-          didAssetsLoad = true;
-          initializeExperience();
-          //loadingAmount = 100;
-          //loadingTextEl.setAttribute('value', `${loadingAmount}%`);
-          //initializeElements();
-        } else {
-          console.log('A');
-          //loadingAmount = (numberOfLoadedAssets / assetsData.length) * 100;
-          //loadingTextEl.setAttribute('value', `${loadingAmount}%`);
-        }
-      }
-    }
-
-    const ground = document.getElementById('ground');
-    ground.addEventListener('click', function (e) {
-      if (!didUserTap) {
-        didUserTap = true;
-
-        const touchPoint = event.detail.intersection.point;
-        const container = document.getElementById('container');
-        container.setAttribute('position', touchPoint);
-
-        activateMedia();
-
-        if (didAssetsLoad) {
-          if (!didExperienceStart) {
-            startExperience();
-          }
-        }
-      }
-    });
-
-    function initializeExperience() {
-      console.log('Initialize');
-    }
-
-    function initializeGiftElement() {
-
-    }
-
-    function initializeCatElement() {
-
-    }
-
-    function initializeVideoElement() {
-
-    }
-
-  }
-});*/
 
 /*<!DOCTYPE html>
 <html>
@@ -736,24 +561,7 @@ particle-system="size: 0.3; velocityValue: 0 35 0; maxParticleCount: 500; maxAge
       cursor="rayOrigin: mouse"
       raycaster="objects: #ground"
     >
-      <a-timeline id="gift-animation-timeline">
-        <a-timeline-animation
-          select="#gift-model"
-          name="gift_01"
-        ></a-timeline-animation>
-        <a-timeline-animation
-          select="#gift-model"
-          name="gift_02"
-        ></a-timeline-animation>
-        <a-timeline-animation
-          select="#gift-model"
-          name="gift_03"
-        ></a-timeline-animation>
-        <a-timeline-animation
-          select="#gift-model"
-          name="gift_04"
-        ></a-timeline-animation>
-      </a-timeline>
+
 
       <a-timeline id="text-01-animation-timeline">
         <a-timeline-animation

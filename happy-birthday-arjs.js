@@ -211,10 +211,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     //Start Experience
     function startExperience() {
       if (!didExperienceStart) {
-        alert('start experience');
-        const box = document.getElementById('box');
-        box.setAttribute('visible', true);
-
         didExperienceStart = true;
         hideLoadingElement();
         showGiftModel();

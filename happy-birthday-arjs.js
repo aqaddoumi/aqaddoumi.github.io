@@ -23,7 +23,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     const button = document.getElementById('start-button');
     button.addEventListener('click', function() {
       if (!didUserTap) {
-        alert('click');
         didUserTap = true;
         hideInterface();
         activateMedia();
@@ -53,7 +52,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     //Listen to Marker Found Event
     el.addEventListener('markerFound', (e) => {
       if (!didFindMarker) {
-        alert('found 2');
         didFindMarker = true;
         if (didUserTap && didAssetsLoad && !didExperienceStart) {
           startExperience();
@@ -199,7 +197,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
       if (count === assets.length) {
         if (!didAssetsLoad) {
-          alert('assets load');
           didAssetsLoad = true;
           if (didUserTap && didFindMarker && !didExperienceStart) {
             startExperience();
@@ -214,6 +211,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     //Start Experience
     function startExperience() {
       if (!didExperienceStart) {
+        alert('start experience');
         const box = document.getElementById('box');
         box.setAttribute('visible', true);
 

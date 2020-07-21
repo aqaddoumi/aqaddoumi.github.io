@@ -12,6 +12,7 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous"/>
+
     <body style="margin : 0px; overflow: hidden;">
       <div id="interface-container">
         <div class="container-fluid" style="height: 100%;">
@@ -45,7 +46,7 @@
           <audio id="confetti-sound-audio-asset" src="./assets/audios/confetti-sound.wav"></audio>
         </a-assets>
       
-        <a-marker preset="hiro">
+        <a-marker emitevents="true" preset="hiro">
           <a-box color="red"></a-box>
         </a-marker>
         <a-entity camera></a-entity>

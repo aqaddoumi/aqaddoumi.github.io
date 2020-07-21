@@ -1,5 +1,8 @@
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
+    const el = this.el;
+    const sceneEl = this.el.sceneEl;
+
     const button = document.getElementById('start-button');
 
     button.addEventListener('click', function() {
@@ -11,6 +14,10 @@ AFRAME.registerComponent('happy-birthday-arjs', {
       const userInterface = document.getElementById('interface-container');
       userInterface.style.display = 'none';
     }
+
+    el.addEventListener('markerFound', (e) => {
+      alert('found 1');
+    });
   }
 });
 
@@ -35,8 +42,8 @@ AFRAME.registerComponent('model-opacity', {
   },
 });
 
-//Show Interface
-//Point Camera At QR Code
+//XXX Show Interface
+//XXX Point Camera At QR Code
 //Hide Interface
 //Activate Media
 
@@ -44,6 +51,7 @@ AFRAME.registerComponent('model-opacity', {
 //Show Loading
 //Hide Loading
 
+//Start Experience
 
 //Show Gift
 //Hide Gift

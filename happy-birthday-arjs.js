@@ -1,5 +1,16 @@
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
+    const button = document.getElementById('start-button');
+
+    button.addEventListener('click', function() {
+      alert('click');
+      hideInterface();
+    })
+
+    function hideInterface() {
+      const userInterface = document.getElementById('interface-container');
+      userInterface.style.display = 'none';
+    }
   }
 });
 

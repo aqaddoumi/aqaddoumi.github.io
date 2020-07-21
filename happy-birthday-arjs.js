@@ -27,10 +27,12 @@ AFRAME.registerComponent('model-opacity', {
 //Show Interface
 //Point Camera At QR Code
 //Hide Interface
+//Activate Media
 
 //Load Assets
 //Show Loading
 //Hide Loading
+
 
 //Show Gift
 //Hide Gift

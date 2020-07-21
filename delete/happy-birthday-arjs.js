@@ -3,7 +3,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     alert('1');
     //Get Element and scene
     const el = this.el;
-    const scene = this.el.sceneEl;
+    const sceneEl = this.el.sceneEl;
 
     //Variables to keep track of experience and when to start properly
     let didUserTap = false;

@@ -21,6 +21,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Get Button
     const button = document.getElementById('start-button');
+    console.log(button);
 
     //Listen to Button Click
     button.addEventListener('click', function() {

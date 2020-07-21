@@ -1,13 +1,28 @@
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
+    //Get Element and scene
     const el = this.el;
     const sceneEl = this.el.sceneEl;
 
+    //Variables to keep track of experience and when to start properly
+    let didUserTap = false;
+    let didAssetsLoad = false;
+    let didFindMarker = false;
+    let didExperienceStart = false;
+
+    //Get Button
     const button = document.getElementById('start-button');
 
+    //Listen to Button Click
     button.addEventListener('click', function() {
       alert('click');
+      didUserTap = true;
       hideInterface();
+      activateMedia();
+
+      if (didAssetsLoad && didFindMarker && !didExperienceStart) {
+        startExperience();
+      } 
     })
 
     function hideInterface() {
@@ -15,9 +30,174 @@ AFRAME.registerComponent('happy-birthday-arjs', {
       userInterface.style.display = 'none';
     }
 
+    //Activate media on touch to enable sounds and playing later on
+    function activateMedia() {
+      for (let i = 0; i < assets.length; i++) {
+        const a = assets[i];
+        if (a.type === 'video' || a.type === 'audio') {
+          a.asset.play();
+          a.asset.pause();
+        }
+      }
+    }
+
+    //Listen to Marker Found Event
     el.addEventListener('markerFound', (e) => {
-      alert('found 1');
+      alert('found 2');
+      didFindMarker = true;
+      if (didUserTap && didAssetsLoad && !didExperienceStart) {
+        startExperience();
+      }
     });
+
+    //Load Assets
+    let assets = [];
+
+    addVideoAssets();
+    addAudioAssets();
+    addModelAssets();
+
+    loadVideoAssets();
+    loadAudioAssets();
+    loadModelAssets();
+
+    //Add Video Assets into assets array
+    function addVideoAssets() {
+      const videoAssets = scene.querySelectorAll('video');
+      for (let i = 0; i < videoAssets.length; i++) {
+        let v = {};
+        v.type = 'video';
+        v.id = videoAssets[i].id;
+        v.asset = videoAssets[i];
+        v.isLoaded = false;
+        assets.push(v);
+      }
+    }
+
+    //Add Audio Assets into assets array
+    function addAudioAssets() {
+      const audioAssets = scene.querySelectorAll('audio');
+      for (let i = 0; i < audioAssets.length; i++) {
+        let a = {};
+        a.type = 'audio';
+        a.id = audioAssets[i].id;
+        a.asset = audioAssets[i];
+        a.isLoaded = false;
+        assets.push(a);
+      }
+    }
+
+    //Add Model Assets into assets array
+    function addModelAssets() {
+      const modelAssets = document.getElementsByClassName('model');
+      for (let i = 0; i < modelAssets.length; i++) {
+        let m = {};
+        m.type = 'model';
+        m.id = modelAssets[i].id;
+        m.asset = modelAssets[i];
+        m.isLoaded = false;
+        assets.push(m);
+      }
+    }
+
+    //Check if video assets are loaded and register events when loaded
+    function loadVideoAssets() {
+      for (let i = 0; i < assets.length; i++) {
+        const a = assets[i];
+        if (a.type === 'video') {
+          if (!a.isLoaded) {
+            if (a.asset.readyState > 3) {
+              videoAssetLoaded(a.id);
+            } else {
+              a.asset.oncanplaythrough = function () {
+                videoAssetLoaded(a.id);
+              };
+            }
+          }
+        }
+      }
+    }
+
+    //Change video asset into loaded in the assets array when loaded
+    function videoAssetLoaded(id) {
+      let video = assets.find((v) => v.type === 'video' && v.id === id);
+      video.isLoaded = true;
+      areAllAssetsAreLoaded();
+    }
+
+    //Check if audio assets are loaded and register events when loaded
+    function loadAudioAssets() {
+      for (let i = 0; i < assets.length; i++) {
+        const a = assets[i];
+        if (a.type === 'audio') {
+          if (!a.isLoaded) {
+            if (a.asset.readyState > 3) {
+              audioAssetLoaded(a.id);
+            } else {
+              a.asset.oncanplaythrough = function () {
+                audioAssetLoaded(a.id);
+              };
+            }
+          }
+        }
+      }
+    }
+
+    //Change video asset into loaded in the assets array when loaded
+    function audioAssetLoaded(id) {
+      let audio = assets.find((v) => v.type === 'audio' && v.id === id);
+      audio.isLoaded = true;
+      areAllAssetsAreLoaded();
+    }
+
+    //Check if model assets are loaded and register events when loaded
+    function loadModelAssets() {
+      for (let i = 0; i < assets.length; i++) {
+        const a = assets[i];
+        if (a.type === 'model') {
+          if (!a.isLoaded) {
+            if (a.asset.hasLoaded) {
+              modelAssetLoaded(a.id);
+            } else {
+              a.asset.addEventListener('loaded', () => {
+                modelAssetLoaded(a.id);
+              });
+            }
+          }
+        }
+      }
+    }
+
+    function modelAssetLoaded(id) {
+      let model = assets.find((v) => v.type === 'model' && v.id === id);
+      model.isLoaded = true;
+      areAllAssetsAreLoaded();
+    }
+
+    //Check if all Assets are loaded
+    function areAllAssetsAreLoaded() {
+      let length = assets.length;
+      let count = 0;
+      for (let i = 0; i < assets.length; i++) {
+        if (assets[i].isLoaded) {
+          count++;
+        }
+      }
+
+      if (count === length) {
+        if (!didAssetsLoad) {
+          didAssetsLoad = true;
+
+          if (didUserTap) {
+            if (!didExperienceStart) {
+              if (didFindMarker) {
+                startExperience();
+              }
+            }
+          }
+        }
+      }
+    }
   }
 });
 

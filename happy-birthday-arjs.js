@@ -12,7 +12,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Elements
     const loadingEl = document.getElementById('loading');
-    //const giftEl = document.getElementById('gift-model');
+    const giftEl = document.getElementById('gift-model');
     //const catEl = document.getElementById('cat-model');
     //const videoEl = document.getElementById('birthday-video');
 
@@ -219,7 +219,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
         didExperienceStart = true;
         hideLoadingElement();
-        //showGiftModel();
+        showGiftModel();
         //playPopSound();
         //startBackgroundMusic();
       }
@@ -240,6 +240,25 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     function updateLoadingProgress() {
       loadingEl.setAttribute('value', `${loadingAmount}%`);
+    }
+
+    //Gift
+    function showGiftModel() {
+      giftElement.object3D.visible = true;
+      giftElement.setAttribute(
+        'animation-timeline',
+        'timeline: #gift-animation-timeline; loop:false;'
+      );
+      giftElement.addEventListener('animationtimelinecomplete', function () {
+        //hideGiftModel();
+        //playConfettiSound();
+
+        //startParticles();
+        //showCatModel();
+        //showHappyBirthdayText();
+        //showBirthdayVideo();
+        //tuneDownBackgroundMusic();
+      });
     }
   }
 });

@@ -36,7 +36,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Elements
     const loadingEl = document.getElementById('loading-text');
-    //const giftEl = document.getElementById('gift-model');
+    const giftEl = document.getElementById('gift-model');
     //const catEl = document.getElementById('cat-model');
     //const videoEl = document.getElementById('birthday-video');
 
@@ -46,13 +46,165 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     //Load Assets
     let assets = [];
 
-    addVideoAssets();
-    addAudioAssets();
-    addModelAssets();
+    loadAssets();
 
-    loadVideoAssets();
-    loadAudioAssets();
-    loadModelAssets();
+    function loadAssets() {
+      addVideoAssets(); 
+      addAudioAssets();
+      addModelAssets();
+  
+      loadVideoAssets();
+      loadAudioAssets();
+      loadModelAssets();
+    }
+
+    //Listen to Button Click
+    const button = document.getElementById('start-button');
+    button.addEventListener('click', function() {
+      if (!didUserTap) {
+        didUserTap = true;
+        hideInterface();
+        activateMedia();
+  
+        if (didAssetsLoad && didFindMarker && !didExperienceStart) {
+          startExperience();
+        } 
+      }
+    })
+
+    function hideInterface() {
+      const userInterface = document.getElementById('interface-container');
+      userInterface.style.display = 'none';
+    }
+
+    //Activate media on touch to enable sounds and playing later on
+    function activateMedia() {
+      for (let i = 0; i < assets.length; i++) {
+        const a = assets[i];
+        if (a.type === 'video' || a.type === 'audio') {
+          a.asset.play();
+          a.asset.pause();
+        }
+      }
+    }
+
+    //Listen to Marker Found Event
+    el.addEventListener('markerFound', (e) => {
+      if (!didFindMarker) {
+        didFindMarker = true;
+        if (didUserTap && didAssetsLoad && !didExperienceStart) {
+          startExperience();
+        } else {
+          showLoadingElement();
+        }
+      }
+    });
+
+    //Check if all Assets are loaded
+    function areAllAssetsAreLoaded() {
+      console.log('assets');
+      let count = 0;
+      for (let i = 0; i < assets.length; i++) {
+        if (assets[i].isLoaded) {
+          count++;
+        }
+      }
+      if (count === assets.length) {
+        console.log('loaded');
+        if (!didAssetsLoad) {
+          didAssetsLoad = true;
+          hideLoadingElement();
+          if (didUserTap && didFindMarker && !didExperienceStart) {
+            startExperience();
+          }
+        }
+      } else {
+        loadingAmount = count / assets.length;
+        updateLoadingProgress();
+      }
+    }
+
+
+    //Start Experience
+    function startExperience() {
+      if (!didExperienceStart) {
+        //alert('start experience');
+        didExperienceStart = true;
+        hideLoadingElement();
+        showGiftModel();
+        playPopAudio();
+        //startBackgroundMusic();
+      }
+    }
+
+    //Loading
+    function showLoadingElement() {
+      loadingEl.setAttribute('color', 'white');
+      loadingEl.setAttribute('value', `${(loadingAmount * 100).toFixed()}%`);
+      loadingEl.setAttribute('align', 'center');
+      loadingEl.object3D.translateY(0.5);
+      loadingEl.setAttribute('visible', true);
+    }
+
+    function hideLoadingElement() {
+      loadingEl.setAttribute('visible', false);
+    }
+
+    function updateLoadingProgress() {
+      loadingEl.setAttribute('value', `${(loadingAmount * 100).toFixed()}%`);
+    }
+
+    //Gift
+    function showGiftModel() {
+      giftEl.object3D.visible = true;
+      giftEl.setAttribute(
+        'animation-timeline',
+        'timeline: #gift-animation-timeline; loop:false;'
+      );
+      giftEl.addEventListener('animationtimelinecomplete', function () {
+        hideGiftModel();
+        playConfettiAudio();
+
+        //startParticles();
+        //showCatModel();
+        //showHappyBirthdayText();
+        //showBirthdayVideo();
+        //tuneDownBackgroundMusic();
+      });
+    }
+
+    function hideGiftModel() {
+      giftEl.setAttribute('animation-mixer', 'loop: pingpong');
+      giftEl.setAttribute(
+        'animation__opacity',
+        'property: model-opacity; to: 0; dur: 500; delay: 500'
+      );
+      giftEl.setAttribute(
+        'animation__scale',
+        'property: scale; to: 1 1 1; dur: 500;'
+      );
+    }
+
+    //Audio
+    function playPopAudio() {
+      const audioAsset = document.getElementById('pop-sound-audio-asset');
+      audioAsset.currentTime = 0;
+      audioAsset.muted = false;
+      audioAsset.volume = 1;
+      audioAsset.play();
+    }
+
+    function playConfettiAudio() {
+      setTimeout(function () {
+        const audioAsset = document.getElementById(
+          'confetti-sound-audio-asset'
+        );
+        audioAsset.currentTime = 0;
+        audioAsset.muted = false;
+        audioAsset.volume = 1;
+        audioAsset.play();
+      }, 250);
+    }
 
     //Add Video Assets into assets array
     function addVideoAssets() {
@@ -169,37 +321,11 @@ AFRAME.registerComponent('happy-birthday-arjs', {
       model.isLoaded = true;
       areAllAssetsAreLoaded();
     }
-
-    //Check if all Assets are loaded
-    function areAllAssetsAreLoaded() {
-      console.log('assets');
-      let count = 0;
-      for (let i = 0; i < assets.length; i++) {
-        if (assets[i].isLoaded) {
-          count++;
-        }
-      }
-      if (count === assets.length) {
-        console.log('loaded');
-        if (!didAssetsLoad) {
-          didAssetsLoad = true;
-          if (didUserTap && didFindMarker && !didExperienceStart) {
-            //startExperience();
-          }
-        }
-      } else {
-        loadingAmount = count / assets.length;
-        updateLoadingProgress();
-      }
-    }
-
-    function updateLoadingProgress() {
-      loadingEl.setAttribute('value', `${(loadingAmount * 100).toFixed()}%`);
-    }
   }
 });
 
 //            <video id="birthday-video-asset" muted autoplay playsinline loop="true" src="./assets/videos/birthday-video.mp4"></video>
+//<audio id="background-music-audio-asset" muted autoplay src="./assets/audios/background-music.mp3"></audio>
 
 /*
 

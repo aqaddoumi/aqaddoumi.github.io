@@ -10,11 +10,15 @@
       <a-scene happy-birthday-arjs embedded arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;" vr-mode-ui="enabled: false;">
         <a-assets timeout="10">
           <a-asset-item class="model" id="gift-asset" src="./assets/models/gift/scene.gltf"></a-asset-item>
+          <a-asset-item class="model" id="cat-asset" src="./assets/models/cat/scene.gltf"></a-asset-item>
+          <video id="birthday-video-asset" muted autoplay loop="true" src="./assets/videos/birthday-video.mp4"></video>
+          <audio id="background-music-audio-asset" src="./assets/audios/background-music.mp3"></audio>
+          <audio id="pop-sound-audio-asset" src="./assets/audios/pop-sound.mp3"></audio>
+          <audio id="confetti-sound-audio-asset" src="./assets/audios/confetti-sound.wav"></audio>
         </a-assets>
         
-        <a-marker id="marker" type='barcode' value='5'>
-          <a-text value="100%" color="white" position="0 4 0"></a-text>
-          <a-gltf-model src="#gift-asset" id="gift-model" scale="0.1 0.1 0.1"></a-gltf-model>
+        <a-marker id="marker" emitevents="true" type='barcode' value='5'>
+          <a-text id="loading-text" scale="2 2 2" value="0%" color="white" position="0 1 0"></a-text>
         </a-marker>
         <a-entity camera></a-entity>
       </a-scene>

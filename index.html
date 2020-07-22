@@ -39,6 +39,8 @@
         <a-assets timeout="10">
           <a-asset-item class="model" id="gift-asset" src="./assets/models/gift/scene.gltf"></a-asset-item>
           <a-asset-item class="model" id="cat-asset" src="./assets/models/cat/scene.gltf"></a-asset-item>
+          <video id="birthday-video-asset" muted autoplay playsinline loop="true" src="./assets/videos/birthday-video.mp4"></video>
+          <audio id="background-music-audio-asset" muted autoplay src="./assets/audios/background-music.mp3"></audio>
           <audio id="pop-sound-audio-asset" muted autoplay src="./assets/audios/pop-sound.mp3"></audio>
           <audio id="confetti-sound-audio-asset" muted autoplay src="./assets/audios/confetti-sound.wav"></audio>
         </a-assets>
@@ -99,7 +101,7 @@
               <a-entity class="particles" particle-system="size: 0.3; velocityValue: 0 35 0; accelerationSpread: 2 0 2; blending: 1; color: #32B744; texture: assets/images/confetti/confetti-05.png; enabled: false;"></a-entity>
             </a-entity>
 
-            <a-entity position="0 1 0" scale="0.05 0.05 0.05">
+            <a-entity position="0 1.2 0" scale="0.05 0.05 0.05">
               <a-entity 
                 visible="false" id="text-01" scale="0 0 0" text="align: center; value:Happy Birthday, ; color:#32B744; shader: msdf; font:https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/kalam/Kalam-Bold.json;" position="0 21 0"
                 animation__text_01_scale_up="property: scale; from: 0 0 0; to: 100 100 100; dur: 500; autoplay: false; easing: easeInOutQuint"

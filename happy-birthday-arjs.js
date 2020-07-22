@@ -211,6 +211,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     //Start Experience
     function startExperience() {
       if (!didExperienceStart) {
+        alert('start experience');
         didExperienceStart = true;
         hideLoadingElement();
         showGiftModel();

@@ -37,8 +37,8 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     //Elements
     const loadingEl = document.getElementById('loading-text');
     const giftEl = document.getElementById('gift-model');
-    //const catEl = document.getElementById('cat-model');
-    //const videoEl = document.getElementById('birthday-video');
+    const catEl = document.getElementById('cat-model');
+    const videoEl = document.getElementById('birthday-video');
 
     //Loading Progress
     let loadingAmount = 0;
@@ -133,7 +133,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         hideLoadingElement();
         showGiftModel();
         playPopAudio();
-        //startBackgroundMusic();
+        startBirthdayMusic();
       }
     }
 
@@ -165,11 +165,11 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         hideGiftModel();
         playConfettiAudio();
 
-        //startParticles();
-        //showCatModel();
-        //showHappyBirthdayText();
-        //showBirthdayVideo();
-        //tuneDownBackgroundMusic();
+        startParticles();
+        showCatModel();
+        showBirthdayText();
+        showBirthdayVideo();
+        tuneDownBirthdayMusic();
       });
     }
 
@@ -183,6 +183,144 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         'animation__scale',
         'property: scale; to: 1 1 1; dur: 500;'
       );
+    }
+
+    //Cat
+    function showCatModel() {
+      catEl.object3D.visible = true;
+      catEl.setAttribute(
+        'animation',
+        'property: scale; to: 0.1 0.1 0.1; dur: 500; delay: 500'
+      );
+    }
+
+    //Particles
+    function startParticles() {
+      const particles = document.getElementsByClassName('particles');
+      for (const p of particles) {
+        setTimeout(function () {
+          p.components['particle-system'].startParticles();
+        }, 200);
+        setTimeout(function () {
+          p.components['particle-system'].stopParticles();
+        }, 800);
+      }
+    }
+
+    //Text
+    function showBirthdayText() {
+      setTimeout(function() {
+        const text01 = document.getElementById('text-01');
+        const text02 = document.getElementById('text-02');
+        const text03 = document.getElementById('text-03');
+        const text04 = document.getElementById('text-04');
+  
+        text01.setAttribute('visible', true);
+        text01.setAttribute(
+          'animation-timeline',
+          'timeline: #text-01-animation-timeline; loop:false;'
+        );
+  
+        setTimeout(function () {
+          text02.setAttribute('visible', true);
+          text02.setAttribute(
+            'animation-timeline',
+            'timeline: #text-02-animation-timeline; loop:false;'
+          );
+        }, 250);
+  
+        setTimeout(function () {
+          text03.setAttribute('visible', true);
+          text03.setAttribute(
+            'animation-timeline',
+            'timeline: #text-03-animation-timeline; loop:false;'
+          );
+        }, 500);
+  
+        setTimeout(function () {
+          text04.setAttribute('visible', true);
+          text04.setAttribute(
+            'animation-timeline',
+            'timeline: #text-04-animation-timeline; loop:false;'
+          );
+        }, 750);
+      }, 2000);
+    }
+
+    //Birthday Video
+    function showBirthdayVideo() {
+      setTimeout(function () {
+        videoElement.object3D.visible = true;
+        const videoAsset = document.getElementById('birthday-video-asset');
+        videoAsset.play();
+        videoAsset.muted = false;
+        videoAsset.volume = 1;
+        videoAsset.loop = false;
+        videoAsset.addEventListener('ended', function() {
+          hideBirthdayVideo();
+        })
+
+        videoEl.setAttribute(
+          'animation',
+          'property: scale; to: 2 2 2; dur: 500;'
+        );
+        
+      }, 6000);
+    }
+
+    function hideBirthdayVideo() {
+      videoEl.setAttribute(
+        'animation',
+        'property: scale; to: 0 0 0; dur: 500;'
+      );
+    }
+
+    //Birthday Music
+    function startBirthdayMusic() {
+      const musicAsset = document.getElementById(
+        'background-music-audio-asset'
+      );
+      musicAsset.currentTime = 0;
+      musicAsset.volume = 0;
+      musicAsset.play();
+
+      let vol = 0;
+      let interval = 200;
+
+      var fadeInMusic = setInterval(function () {
+        if (vol < 1) {
+          vol += 0.05;
+          if (vol > 1) {
+            vol = 1;
+          }
+          musicAsset.volume = vol;
+        } else {
+          clearInterval(fadeInMusic);
+        }
+      }, interval);
+    }
+
+    function tuneDownBirthdayMusic() {
+      const musicAsset = document.getElementById(
+        'background-music-audio-asset'
+      );
+      musicAsset.volume = 1;
+
+      let vol = 1;
+      let interval = 500;
+      let newVol = 0.1;
+
+      var fadeOutMusic = setInterval(function () {
+        if (vol > newVol) {
+          vol -= 0.05;
+          if (vol < newVol) {
+            vol = newVol;
+          }
+          musicAsset.volume = vol;
+        } else {
+          clearInterval(fadeOutMusic);
+        }
+      }, interval);
     }
 
     //Audio

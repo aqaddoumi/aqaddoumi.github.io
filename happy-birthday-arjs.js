@@ -23,148 +23,8 @@ AFRAME.registerComponent('model-opacity', {
 
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
-    const assetsData = [
-
-      {
-        name: 'birthday-video-asset',
-        //url: './assets/videos/birthday-video.mp4',
-        url: 'https://admin.talkar.app/uploads/talk_video_mp4_cba53f5b97.mp4',
-        type: 'video'
-      }
-
-    ]
-
-    /*      {
-        name: 'birthday-audio-asset',
-        url: './assets/audios/background-music.mp3',
-        type: 'audio'
-      },
-      {
-        name: 'pop-audio-asset',
-        url: './assets/audios/pop-sound.mp3',
-        type: 'audio'
-      },
-      {
-        name: 'confetti-audio-asset',
-        url: './assets/audios/confetti-sound.wav',
-        type: 'audio'
-      }
-            {
-        name: 'gift-model-asset',
-        url: './assets/models/gift/scene.gltf',
-        type: 'model'
-      },
-      {
-        name: 'cat-model-asset',
-        url: './assets/models/cat/scene.gltf',
-        type: 'model'
-      },*/
-
-    let loadingAmount = 0;
-
-    let modelLoader = new THREE.GLTFLoader();
-
-    let assets = {};
-    let numberOfLoadedAssets = 0;
-
-    let elements = {};
-    let numberOfInitializedElements = 0;
-
-    let didAssetsLoad = false;
-    let didElementsInitialize = false;
-    let didUserTap = false;
-    let didExperienceStart = false;
-
-    initializeAssets();
-
-    function initializeAssets() {
-      for (const a of assetsData) {
-        a.isLoaded = false;
-        if (a.type == 'model') {
-          loadModelAsset(a);
-        } else if (a.type == 'audio') {
-          loadAudioAsset(a);
-        } else if (a.type == 'video') {
-          loadVideoAsset(a);
-        } 
-      }
-    }
-
-    function loadVideoAsset(assetData) {
-      console.log('video');
-      const videoAsset = document.createElement('video');
-      videoAsset.setAttribute('id', assetData.name);
-      videoAsset.setAttribute('crossorigin', 'anonymous');
-      videoAsset.setAttribute('src', assetData.url);
-      videoAsset.setAttribute('playsinline', '');
-      document.body.appendChild(videoAsset);
-      videoAsset.oncanplaythrough = function () {
-        if (!assetData.isLoaded) {
-          loadAsset(assetData, videoAsset);
-        }
-      };
-      if (!assetData.isLoaded) {
-        if (videoAsset.readyState > 3) {
-          loadAsset(assetData, videoAsset);
-        }
-      }
-    }
-
-    function loadAudioAsset(assetData) {
-      console.log('audio');
-      const audioAsset = document.createElement('audio');
-      audioAsset.setAttribute('id', assetData.name);
-      audioAsset.setAttribute('crossorigin', 'anonymous');
-      audioAsset.setAttribute('src', assetData.url);
-      document.body.appendChild(audioAsset);
-      audioAsset.oncanplaythrough = function () {
-        if (!assetData.isLoaded) {
-          loadAsset(assetData, audioAsset);
-        }
-      };
-      if (!assetData.isLoaded) {
-        if (audioAsset.readyState > 3) {
-          loadAsset(assetData, audioAsset);
-        }
-      }
-    }
-
-    function loadModelAsset(assetData) {
-      console.log('model');
-      modelLoader.load(assetData.url, function (modelAsset) {
-        if (assetData.isLoaded) {
-          loadAsset(assetData, modelAsset);
-        }
-      });
-    }
-
-    function loadAsset(assetData, asset) {
-      console.log("AAAAAAA");
-      assetData.isLoaded = true;
-      assetData.asset = asset;
-      numberOfLoadedAssets++;
-      onAssetLoaded();
-    }
-
-    function onAssetLoaded() {
-      console.log('ASSET');
-      if (!didAssetsLoad) {
-        if (numberOfLoadedAssets === assetsData.length) {
-          didAssetsLoad = true;
-          console.log('LOADED');
-          //loadingAmount = 100;
-          //loadingTextEl.setAttribute('value', `${loadingAmount}%`);
-          //initializeElements();
-        } else {
-          //loadingAmount = (numberOfLoadedAssets / assetsData.length) * 100;
-          //loadingTextEl.setAttribute('value', `${loadingAmount}%`);
-        }
-      }
-    }
-  }
-});
-
-    /*//Get Element and scene
+    console.log('init');
+    //Get Element and scene
     const el = this.el;
     const scene = this.el.sceneEl;
 
@@ -279,6 +139,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Change video asset into loaded in the assets array when loaded
     function audioAssetLoaded(id) {
+      console.log('audio');
       let audio = assets.find((v) => v.type === 'audio' && v.id === id);
       audio.isLoaded = true;
       areAllAssetsAreLoaded();
@@ -311,6 +172,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Check if all Assets are loaded
     function areAllAssetsAreLoaded() {
+      console.log('assets');
       let count = 0;
       for (let i = 0; i < assets.length; i++) {
         if (assets[i].isLoaded) {
@@ -322,7 +184,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         if (!didAssetsLoad) {
           didAssetsLoad = true;
           if (didUserTap && didFindMarker && !didExperienceStart) {
-            startExperience();
+            //startExperience();
           }
         }
       } else {
@@ -333,7 +195,11 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     function updateLoadingProgress() {
       loadingEl.setAttribute('value', `${(loadingAmount * 100).toFixed()}%`);
-    }*/
+    }
+  }
+});
+
+//            <video id="birthday-video-asset" muted autoplay playsinline loop="true" src="./assets/videos/birthday-video.mp4"></video>
 
 /*
 
@@ -514,3 +380,143 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     </body>
 </html>
 */
+
+
+/*
+    const assetsData = [
+
+      {
+        name: 'birthday-video-asset',
+        //url: './assets/videos/birthday-video.mp4',
+        url: 'https://admin.talkar.app/uploads/talk_video_mp4_cba53f5b97.mp4',
+        type: 'video'
+      }
+      {
+        name: 'birthday-audio-asset',
+        url: './assets/audios/background-music.mp3',
+        type: 'audio'
+      },
+      {
+        name: 'pop-audio-asset',
+        url: './assets/audios/pop-sound.mp3',
+        type: 'audio'
+      },
+      {
+        name: 'confetti-audio-asset',
+        url: './assets/audios/confetti-sound.wav',
+        type: 'audio'
+      }
+            {
+        name: 'gift-model-asset',
+        url: './assets/models/gift/scene.gltf',
+        type: 'model'
+      },
+      {
+        name: 'cat-model-asset',
+        url: './assets/models/cat/scene.gltf',
+        type: 'model'
+      }
+
+    ]
+
+      let loadingAmount = 0;
+
+      let modelLoader = new THREE.GLTFLoader();
+  
+      let assets = {};
+      let numberOfLoadedAssets = 0;
+  
+      let elements = {};
+      let numberOfInitializedElements = 0;
+  
+      let didAssetsLoad = false;
+      let didElementsInitialize = false;
+      let didUserTap = false;
+      let didExperienceStart = false;
+  
+      initializeAssets();
+  
+      function initializeAssets() {
+        for (const a of assetsData) {
+          a.isLoaded = false;
+          if (a.type == 'model') {
+            loadModelAsset(a);
+          } else if (a.type == 'audio') {
+            loadAudioAsset(a);
+          } else if (a.type == 'video') {
+            loadVideoAsset(a);
+          } 
+        }
+      }
+  
+      function loadVideoAsset(assetData) {
+        console.log('video');
+        const videoAsset = document.createElement('video');
+        videoAsset.setAttribute('id', assetData.name);
+        videoAsset.setAttribute('crossorigin', 'anonymous');
+        videoAsset.setAttribute('src', assetData.url);
+        videoAsset.setAttribute('playsinline', '');
+        document.body.appendChild(videoAsset);
+        videoAsset.oncanplaythrough = function () {
+          if (!assetData.isLoaded) {
+            loadAsset(assetData, videoAsset);
+          }
+        };
+        if (!assetData.isLoaded) {
+          if (videoAsset.readyState > 3) {
+            loadAsset(assetData, videoAsset);
+          }
+        }
+      }
+  
+      function loadAudioAsset(assetData) {
+        console.log('audio');
+        const audioAsset = document.createElement('audio');
+        audioAsset.setAttribute('id', assetData.name);
+        audioAsset.setAttribute('crossorigin', 'anonymous');
+        audioAsset.setAttribute('src', assetData.url);
+        document.body.appendChild(audioAsset);
+        audioAsset.oncanplaythrough = function () {
+          if (!assetData.isLoaded) {
+            loadAsset(assetData, audioAsset);
+          }
+        };
+        if (!assetData.isLoaded) {
+          if (audioAsset.readyState > 3) {
+            loadAsset(assetData, audioAsset);
+          }
+        }
+      }
+  
+      function loadModelAsset(assetData) {
+        console.log('model');
+        modelLoader.load(assetData.url, function (modelAsset) {
+          if (assetData.isLoaded) {
+            loadAsset(assetData, modelAsset);
+          }
+        });
+      }
+  
+      function loadAsset(assetData, asset) {
+        console.log("AAAAAAA");
+        assetData.isLoaded = true;
+        assetData.asset = asset;
+        numberOfLoadedAssets++;
+        onAssetLoaded();
+      }
+  
+      function onAssetLoaded() {
+        console.log('ASSET');
+        if (!didAssetsLoad) {
+          if (numberOfLoadedAssets === assetsData.length) {
+            didAssetsLoad = true;
+            console.log('LOADED');
+            //loadingAmount = 100;
+            //loadingTextEl.setAttribute('value', `${loadingAmount}%`);
+            //initializeElements();
+          } else {
+            //loadingAmount = (numberOfLoadedAssets / assetsData.length) * 100;
+            //loadingTextEl.setAttribute('value', `${loadingAmount}%`);
+          }
+        }
+      }*/

@@ -82,7 +82,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         didFindMarker = true;
         if (didUserTap && didAssetsLoad && !didExperienceStart) {
           startExperience();
-        } else if (didUserTap) {
+        } else {
           showLoadingElement();
         }
       }

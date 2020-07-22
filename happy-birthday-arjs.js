@@ -26,29 +26,15 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     const assetsData = [
 
       {
-        name: 'confetti-audio-asset',
-        url: './assets/audios/confetti-sound.wav',
-        type: 'audio'
+        name: 'birthday-video-asset',
+        //url: './assets/videos/birthday-video.mp4',
+        url: 'https://admin.talkar.app/uploads/talk_video_mp4_cba53f5b97.mp4',
+        type: 'video'
       }
+
     ]
 
-/*
-      {
-        name: 'gift-model-asset',
-        url: './assets/models/gift/scene.gltf',
-        type: 'model'
-      },
-      {
-        name: 'cat-model-asset',
-        url: './assets/models/cat/scene.gltf',
-        type: 'model'
-      },
-      {
-        name: 'birthday-video-asset',
-        url: './assets/videos/birthday-video.mp4',
-        type: 'video'
-      },
-      {
+    /*      {
         name: 'birthday-audio-asset',
         url: './assets/audios/background-music.mp3',
         type: 'audio'
@@ -57,6 +43,21 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         name: 'pop-audio-asset',
         url: './assets/audios/pop-sound.mp3',
         type: 'audio'
+      },
+      {
+        name: 'confetti-audio-asset',
+        url: './assets/audios/confetti-sound.wav',
+        type: 'audio'
+      }
+            {
+        name: 'gift-model-asset',
+        url: './assets/models/gift/scene.gltf',
+        type: 'model'
+      },
+      {
+        name: 'cat-model-asset',
+        url: './assets/models/cat/scene.gltf',
+        type: 'model'
       },*/
 
     let loadingAmount = 0;

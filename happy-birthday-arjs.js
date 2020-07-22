@@ -23,9 +23,164 @@ AFRAME.registerComponent('model-opacity', {
 
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
-    //Get Element and scene
+    const assetsData = [
+
+      {
+        name: 'confetti-audio-asset',
+        url: './assets/audios/confetti-sound.wav',
+        type: 'audio'
+      }
+    ]
+
+/*
+      {
+        name: 'gift-model-asset',
+        url: './assets/models/gift/scene.gltf',
+        type: 'model'
+      },
+      {
+        name: 'cat-model-asset',
+        url: './assets/models/cat/scene.gltf',
+        type: 'model'
+      },
+      {
+        name: 'birthday-video-asset',
+        url: './assets/videos/birthday-video.mp4',
+        type: 'video'
+      },
+      {
+        name: 'birthday-audio-asset',
+        url: './assets/audios/background-music.mp3',
+        type: 'audio'
+      },
+      {
+        name: 'pop-audio-asset',
+        url: './assets/audios/pop-sound.mp3',
+        type: 'audio'
+      },*/
+
+    let loadingAmount = 0;
+
+    let modelLoader = new THREE.GLTFLoader();
+
+    let assets = {};
+    let numberOfLoadedAssets = 0;
+
+    let elements = {};
+    let numberOfInitializedElements = 0;
+
+    let didAssetsLoad = false;
+    let didElementsInitialize = false;
+    let didUserTap = false;
+    let didExperienceStart = false;
+
+    initializeAssets();
+
+    function initializeAssets() {
+      for (const a of assetsData) {
+        a.isLoaded = false;
+        if (a.type == 'model') {
+          loadModelAsset(a);
+        } else if (a.type == 'audio') {
+          loadAudioAsset(a);
+        } else if (a.type == 'video') {
+          loadVideoAsset(a);
+        } 
+      }
+    }
+
+    function loadVideoAsset(assetData) {
+      console.log('video');
+      const videoAsset = document.createElement('video');
+      videoAsset.setAttribute('id', assetData.name);
+      videoAsset.setAttribute('crossorigin', 'anonymous');
+      videoAsset.setAttribute('src', assetData.url);
+      videoAsset.setAttribute('playsinline', '');
+      document.body.appendChild(videoAsset);
+      videoAsset.oncanplaythrough = function () {
+        if (!assetData.isLoaded) {
+          loadAsset(assetData, videoAsset);
+        }
+      };
+      if (!assetData.isLoaded) {
+        if (videoAsset.readyState > 3) {
+          loadAsset(assetData, videoAsset);
+        }
+      }
+    }
+
+    function loadAudioAsset(assetData) {
+      console.log('audio');
+      const audioAsset = document.createElement('audio');
+      audioAsset.setAttribute('id', assetData.name);
+      audioAsset.setAttribute('crossorigin', 'anonymous');
+      audioAsset.setAttribute('src', assetData.url);
+      document.body.appendChild(audioAsset);
+      audioAsset.oncanplaythrough = function () {
+        if (!assetData.isLoaded) {
+          loadAsset(assetData, audioAsset);
+        }
+      };
+      if (!assetData.isLoaded) {
+        if (audioAsset.readyState > 3) {
+          loadAsset(assetData, audioAsset);
+        }
+      }
+    }
+
+    function loadModelAsset(assetData) {
+      console.log('model');
+      modelLoader.load(assetData.url, function (modelAsset) {
+        if (assetData.isLoaded) {
+          loadAsset(assetData, modelAsset);
+        }
+      });
+    }
+
+    function loadAsset(assetData, asset) {
+      console.log("AAAAAAA");
+      assetData.isLoaded = true;
+      assetData.asset = asset;
+      numberOfLoadedAssets++;
+      onAssetLoaded();
+    }
+
+    function onAssetLoaded() {
+      console.log('ASSET');
+      if (!didAssetsLoad) {
+        if (numberOfLoadedAssets === assetsData.length) {
+          didAssetsLoad = true;
+          console.log('LOADED');
+          //loadingAmount = 100;
+          //loadingTextEl.setAttribute('value', `${loadingAmount}%`);
+          //initializeElements();
+        } else {
+          //loadingAmount = (numberOfLoadedAssets / assetsData.length) * 100;
+          //loadingTextEl.setAttribute('value', `${loadingAmount}%`);
+        }
+      }
+    }
+  }
+});
+
+    /*//Get Element and scene
     const el = this.el;
     const scene = this.el.sceneEl;
+
+    //Variables to keep track of experience and when to start properly
+    let didUserTap = false;
+    let didAssetsLoad = false;
+    let didFindMarker = false;
+    let didExperienceStart = false;
+
+    //Elements
+    const loadingEl = document.getElementById('loading-text');
+    //const giftEl = document.getElementById('gift-model');
+    //const catEl = document.getElementById('cat-model');
+    //const videoEl = document.getElementById('birthday-video');
+
+    //Loading Progress
+    let loadingAmount = 0;
 
     //Load Assets
     let assets = [];
@@ -123,7 +278,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Change video asset into loaded in the assets array when loaded
     function audioAssetLoaded(id) {
-      console.log('audio');
       let audio = assets.find((v) => v.type === 'audio' && v.id === id);
       audio.isLoaded = true;
       areAllAssetsAreLoaded();
@@ -149,7 +303,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Change model asset into loaded in the assets array when loaded
     function modelAssetLoaded(id) {
-      console.log('model');
       let model = assets.find((v) => v.type === 'model' && v.id === id);
       model.isLoaded = true;
       areAllAssetsAreLoaded();
@@ -163,23 +316,26 @@ AFRAME.registerComponent('happy-birthday-arjs', {
           count++;
         }
       }
-      console.log(count);
-
       if (count === assets.length) {
-        console.log("LOADED");
-        /*if (!didAssetsLoad) {
+        console.log('loaded');
+        if (!didAssetsLoad) {
           didAssetsLoad = true;
           if (didUserTap && didFindMarker && !didExperienceStart) {
             startExperience();
           }
-        }*/
-      } //else {
-        //loadingAmount = count / assets.length;
-        //updateLoadingProgress();
-      //}
+        }
+      } else {
+        loadingAmount = count / assets.length;
+        updateLoadingProgress();
+      }
     }
-  }
-});
+
+    function updateLoadingProgress() {
+      loadingEl.setAttribute('value', `${(loadingAmount * 100).toFixed()}%`);
+    }*/
+
+/*
+
 
 
 /*

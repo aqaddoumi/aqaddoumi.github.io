@@ -249,6 +249,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Birthday Video
     function showBirthdayVideo() {
+      console.log('show video');
       setTimeout(function () {
         videoElement.object3D.visible = true;
         const videoAsset = document.getElementById('birthday-video-asset');
@@ -265,7 +266,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
           'property: scale; to: 2 2 2; dur: 500;'
         );
         
-      }, 6000);
+      }, 8000);
     }
 
     function hideBirthdayVideo() {
@@ -462,8 +463,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
   }
 });
 
-//            <video id="birthday-video-asset" muted autoplay playsinline loop="true" src="./assets/videos/birthday-video.mp4"></video>
-//<audio id="background-music-audio-asset" muted autoplay src="./assets/audios/background-music.mp3"></audio>
 
 /*
 

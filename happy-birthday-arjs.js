@@ -290,3 +290,19 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     }
   }
 });
+
+/*
+  <script src="happy-birthday-arjs.js"></script>
+
+<a-text id="loading" visible="false"></a-text>
+<a-box position="0 0 0" id="box" color="red" visible="false"></a-box>
+
+<a-entity scale="0.1 0.1 0.1">
+  <a-gltf-model visible="false" src="#gift-asset" id="gift-model" model-opacity="1" scale="0 0 0"
+  animation__gift_01="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; autoplay: false; easing: easeInOutQuint"
+  animation__gift_02="property: scale; from: 1 1 1; to: 1.2 0.6 1.2; dur: 500; autoplay: false; easing: easeInOutQuint;"
+  animation__gift_03="property: scale; from: 1.2 0.6 1.2; to: 0.6 1.2 0.6; dur: 500; autoplay: false; easing: easeInOutQuint"
+  animation__gift_04="property: scale; from: 0.6 1.2 0.6; to: 1 0.6 1; dur: 250; autoplay: false; easing: easeInOutQuint"
+  ></a-gltf-model>
+</a-entity>
+*/

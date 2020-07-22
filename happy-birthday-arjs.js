@@ -306,3 +306,75 @@ AFRAME.registerComponent('happy-birthday-arjs', {
   ></a-gltf-model>
 </a-entity>
 */
+
+/*<!DOCTYPE html>
+<html>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+  <link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous"/>
+  <link rel="stylesheet" type="text/css" href="./styles.css" />
+  <body>
+    <div id="interface-container">
+      <div class="container-fluid" style="height: 100%;">
+        <div class="row justify-content-center align-items-center" style="height: 20%;">
+          <div class="col-10">
+            <h3 class="text-center" style="color: white">
+            Pointt Device at QR Code
+            </h3>
+          </div>
+        </div>
+  
+        <div class="row justify-content-center align-items-center" style="height: 60%;"></div>
+  
+        <div class="row justify-content-center align-items-center" style="height: 20%; z-index: 11;">
+          <button type="button" id="start-button" class="btn btn-primary">Got It</button>
+        </div>
+      </div>
+    </div>
+
+    <a-scene happy-birthday-arjs embedded arjs renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;" vr-mode-ui="enabled: false;">
+      <a-assets timeout="10">
+        <a-asset-item class="model" id="gift-asset" src="./assets/models/gift/scene.gltf"></a-asset-item>
+        <a-asset-item class="model" id="cat-asset" src="./assets/models/cat/scene.gltf"></a-asset-item>
+        <video id="birthday-video-asset" muted autoplay loop="true" src="./assets/videos/birthday-video.mp4"></video>
+        <audio id="background-music-audio-asset" src="./assets/audios/background-music.mp3"></audio>
+        <audio id="pop-sound-audio-asset" src="./assets/audios/pop-sound.mp3"></audio>
+        <audio id="confetti-sound-audio-asset" src="./assets/audios/confetti-sound.wav"></audio>
+      </a-assets>
+
+      <a-timeline id="gift-animation-timeline">
+        <a-timeline-animation select="#gift-model" name="gift_01"></a-timeline-animation>
+        <a-timeline-animation select="#gift-model" name="gift_02"></a-timeline-animation>
+        <a-timeline-animation select="#gift-model" name="gift_03"></a-timeline-animation>
+        <a-timeline-animation select="#gift-model" name="gift_04"></a-timeline-animation>
+      </a-timeline>
+
+      <a-marker emitevents="true" type="barcode" value="5"></a-marker>
+        <a-box color="red"></a-box>
+      </a-marker>
+
+      <a-entity camera position="0 0 0"></a-entity>
+
+    </a-scene>
+
+      <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+      <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+      <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+  </body>
+</html>*/

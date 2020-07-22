@@ -1,5 +1,15 @@
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
+    const marker = document.getElementById('marker');
+    const box = document.createElement('a-box');
+    box.setAttribute('color', 'red');
+    box.setAttribute('position', '0 2 0');
+    marker.appendChild(box);
+  }
+})
+
+/*AFRAME.registerComponent('happy-birthday-arjs', {
+  init: function () {
     //Get Element and scene
     const el = this.el;
     const scene = this.el.sceneEl;
@@ -447,7 +457,7 @@ AFRAME.registerComponent('model-opacity', {
       }
     });
   },
-});
+});*/
 
 //Show Interface
 //Point Camera At QR Code

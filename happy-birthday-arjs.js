@@ -1,133 +1,42 @@
+
+
+AFRAME.registerComponent('model-opacity', {
+  schema: { default: 1.0 },
+  init: function () {
+    this.el.addEventListener('model-loaded', this.update.bind(this));
+  },
+  update: function () {
+    var mesh = this.el.getObject3D('mesh');
+    var data = this.data;
+    if (!mesh) {
+      return;
+    }
+    mesh.traverse(function (node) {
+      if (node.isMesh) {
+        node.material.opacity = data;
+        node.material.transparent = data < 1.0;
+        node.material.needsUpdate = true;
+      }
+    });
+  },
+});
+
 AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
     //Get Element and scene
     const el = this.el;
     const scene = this.el.sceneEl;
 
-    //Variables to keep track of experience and when to start properly
-    let didUserTap = false;
-    let didAssetsLoad = false;
-    let didFindMarker = false;
-    let didExperienceStart = false;
-
-    //Loading Progress
-    let loadingAmount = 0;
-
-    //Elements
-    const loadingEl = document.getElementById('loading-text');
-    //const giftEl = document.getElementById('gift-model');
-    //const catEl = document.getElementById('cat-model');
-    //const videoEl = document.getElementById('birthday-video');
-
     //Load Assets
     let assets = [];
 
-    loadAssets();
-    
-    //Check if all Assets are loaded
-    function areAllAssetsAreLoaded() {
-      let count = 0;
-      for (let i = 0; i < assets.length; i++) {
-        if (assets[i].isLoaded) {
-          count++;
-        }
-      }
+    addVideoAssets();
+    addAudioAssets();
+    addModelAssets();
 
-      if (count === assets.length) {
-        if (!didAssetsLoad) {
-          didAssetsLoad = true;
-          if (didUserTap && didFindMarker && !didExperienceStart) {
-            startExperience();
-          }
-        }
-      } else {
-        loadingAmount = count / assets.length;
-        updateLoadingProgress();
-      }
-    }
-
-    //Listen to Button Click
-    const button = document.getElementById('start-button');
-    button.addEventListener('click', function() {
-      if (!didUserTap) {
-        didUserTap = true;
-        hideInterface();
-        activateMedia();
-          
-        if (didAssetsLoad && didFindMarker && !didExperienceStart) {
-          startExperience();
-        }
-      }
-    })
-
-    function hideInterface() {
-      const userInterface = document.getElementById('interface-container');
-      userInterface.style.display = 'none';
-    }
-
-    //Activate media on touch to enable sounds and playing later on
-    function activateMedia() {
-      for (let i = 0; i < assets.length; i++) {
-        const a = assets[i];
-        if (a.type === 'video' || a.type === 'audio') {
-          a.asset.play();
-          a.asset.pause();
-        }
-      }
-    }
-
-    //Listen to Marker Found Event
-    el.addEventListener('markerFound', (e) => {
-      if (!didFindMarker) {
-        didFindMarker = true;
-        if (didUserTap && didAssetsLoad && !didExperienceStart) {
-          startExperience();
-        } else {
-          showLoadingElement();
-        }
-      }
-    });
-
-    //Loading
-    function showLoadingElement() {
-      //loadingEl.setAttribute('color', 'white');
-      //loadingEl.setAttribute('value', `${loadingAmount}%`);
-      //loadingEl.setAttribute('align', 'center');
-      //loadingEl.object3D.translateY(0.5);
-      //loadingEl.setAttribute('visible', true);
-    }
-
-    function hideLoadingElement() {
-      //loadingEl.setAttribute('visible', false);
-    }
-
-    function updateLoadingProgress() {
-      loadingEl.setAttribute('value', `${loadingAmount}%`);
-    }
-
-
-    //Start Experience
-    function startExperience() {
-      if (!didExperienceStart) {
-        //alert('start experience');
-        didExperienceStart = true;
-        //hideLoadingElement();
-        //showGiftModel();
-        //playPopSound();
-        //startBackgroundMusic();
-      }
-    }
-
-    //Configure and Load Assets
-    function loadAssets() {
-      addVideoAssets();
-      addAudioAssets();
-      addModelAssets();
-  
-      loadVideoAssets();
-      loadAudioAssets();
-      loadModelAssets();
-    }
+    loadVideoAssets();
+    loadAudioAssets();
+    loadModelAssets();
 
     //Add Video Assets into assets array
     function addVideoAssets() {
@@ -242,9 +151,120 @@ AFRAME.registerComponent('happy-birthday-arjs', {
       model.isLoaded = true;
       areAllAssetsAreLoaded();
     }
-  }
-})
 
+    //Check if all Assets are loaded
+    function areAllAssetsAreLoaded() {
+      let count = 0;
+      for (let i = 0; i < assets.length; i++) {
+        if (assets[i].isLoaded) {
+          count++;
+        }
+      }
+      console.log(count);
+
+      if (count === assets.length) {
+        console.log("LOADED");
+        /*if (!didAssetsLoad) {
+          didAssetsLoad = true;
+          if (didUserTap && didFindMarker && !didExperienceStart) {
+            startExperience();
+          }
+        }*/
+      } //else {
+        //loadingAmount = count / assets.length;
+        //updateLoadingProgress();
+      //}
+    }
+  }
+});
+
+
+/*
+    //Get Element and scene
+    const el = this.el;
+    const scene = this.el.sceneEl;
+
+    //Variables to keep track of experience and when to start properly
+    let didUserTap = false;
+    let didAssetsLoad = false;
+    let didFindMarker = false;
+    let didExperienceStart = false;
+
+    //Loading Progress
+    let loadingAmount = 0;
+
+    //Elements
+    const loadingEl = document.getElementById('loading-text');
+    //const giftEl = document.getElementById('gift-model');
+    //const catEl = document.getElementById('cat-model');
+    //const videoEl = document.getElementById('birthday-video');
+
+    //Load Assets
+    let assets = [];
+
+    initializeLoadingElement();
+
+    function initializeLoadingElement() {
+      loadingEl.setAttribute('align', 'center');
+      loadingEl.setAttribute('color', 'red');
+      loadingEl.setAttribute('postion', '0 0.5 0');
+      loadingEl.setAttribute('value', '0%');
+      loadingEl.setAttribute('scale', '2 2 2');
+    }
+
+    //Listen to Button Click
+    const button = document.getElementById('start-button');
+    button.addEventListener('click', function() {
+      if (!didUserTap) {
+        didUserTap = true;
+        //hideInterface();
+        //showGiftModel();
+        //activateMedia();
+          
+        if (didAssetsLoad && didFindMarker && !didExperienceStart) {
+          //startExperience();
+        }
+      }
+    })
+
+    function hideInterface() {
+      const userInterface = document.getElementById('interface-container');
+      userInterface.style.display = 'none';
+    }
+
+    //Listen to Marker Found Event
+    el.addEventListener('markerFound', (e) => {
+      if (!didFindMarker) {
+        didFindMarker = true;
+        if (didUserTap && didAssetsLoad && !didExperienceStart) {
+          startExperience();
+        } else {
+          showLoadingElement();
+        }
+      }
+    });
+
+    //Loading
+    function showLoadingElement() {
+      loadingEl.setAttribute('color', 'green');
+      //loadingEl.setAttribute('value', `${loadingAmount}%`);
+      //loadingEl.setAttribute('align', 'center');
+      //loadingEl.object3D.translateY(0.5);
+      //loadingEl.setAttribute('visible', true);
+    }
+
+    //Start Experience
+    function startExperience() {
+      if (!didExperienceStart) {
+        //alert('start experience');
+        didExperienceStart = true;
+        //hideLoadingElement();
+        //showGiftModel();
+        //playPopSound();
+        //startBackgroundMusic();
+      }
+    }
+  }*/
 /*AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
 
@@ -302,45 +322,35 @@ AFRAME.registerComponent('happy-birthday-arjs', {
   }
 });*/
 
+
 /*
-  <script src="happy-birthday-arjs.js"></script>
-
-<a-text id="loading" visible="false"></a-text>
-<a-box position="0 0 0" id="box" color="red" visible="false"></a-box>
-
-<a-entity scale="0.1 0.1 0.1">
-  <a-gltf-model visible="false" src="#gift-asset" id="gift-model" model-opacity="1" scale="0 0 0"
-  animation__gift_01="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; autoplay: false; easing: easeInOutQuint"
-  animation__gift_02="property: scale; from: 1 1 1; to: 1.2 0.6 1.2; dur: 500; autoplay: false; easing: easeInOutQuint;"
-  animation__gift_03="property: scale; from: 1.2 0.6 1.2; to: 0.6 1.2 0.6; dur: 500; autoplay: false; easing: easeInOutQuint"
-  animation__gift_04="property: scale; from: 0.6 1.2 0.6; to: 1 0.6 1; dur: 250; autoplay: false; easing: easeInOutQuint"
-  ></a-gltf-model>
-</a-entity>
-*/
-
-/*<!DOCTYPE html>
+<!doctype HTML>
 <html>
-  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  </head>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
   <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+  <script src="happy-birthday-arjs.js"></script>
 
-  <body>
-
-
-    <a-scene happy-birthday-arjs embedded arjs renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;" vr-mode-ui="enabled: false;">
-
-
-      <a-timeline id="gift-animation-timeline">
-        <a-timeline-animation select="#gift-model" name="gift_01"></a-timeline-animation>
-        <a-timeline-animation select="#gift-model" name="gift_02"></a-timeline-animation>
-        <a-timeline-animation select="#gift-model" name="gift_03"></a-timeline-animation>
-        <a-timeline-animation select="#gift-model" name="gift_04"></a-timeline-animation>
-      </a-timeline>
-
-
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+  <link rel="stylesheet" type="text/css" href="./styles.css" />
+    
+  <body style='margin : 0px; overflow: hidden;'>    
+    <a-scene happy-birthday-arjs embedded arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;" vr-mode-ui="enabled: false;">
+      <a-marker id="marker"  emitevents="true" type='barcode' value='5'>
+        <a-text id="loading-text"></a-text>
+        <a-box color="red"></a-box>
+      </a-marker>
+      <a-entity camera></a-entity>
     </a-scene>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-  </body>
-</html>*/
+    </body>
+</html>
+*/

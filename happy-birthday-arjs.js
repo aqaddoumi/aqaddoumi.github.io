@@ -97,6 +97,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Change video asset into loaded in the assets array when loaded
     function videoAssetLoaded(id) {
+      console.log('video');
       let video = assets.find((v) => v.type === 'video' && v.id === id);
       video.isLoaded = true;
       areAllAssetsAreLoaded();
@@ -122,6 +123,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Change video asset into loaded in the assets array when loaded
     function audioAssetLoaded(id) {
+      console.log('audio');
       let audio = assets.find((v) => v.type === 'audio' && v.id === id);
       audio.isLoaded = true;
       areAllAssetsAreLoaded();
@@ -147,6 +149,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     //Change model asset into loaded in the assets array when loaded
     function modelAssetLoaded(id) {
+      console.log('model');
       let model = assets.find((v) => v.type === 'model' && v.id === id);
       model.isLoaded = true;
       areAllAssetsAreLoaded();

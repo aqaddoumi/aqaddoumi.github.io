@@ -46,6 +46,48 @@ AFRAME.registerComponent('happy-birthday-arjs', {
       }
     }
 
+    //Listen to Button Click
+    const button = document.getElementById('start-button');
+    button.addEventListener('click', function() {
+      if (!didUserTap) {
+        didUserTap = true;
+        hideInterface();
+        activateMedia();
+          
+        if (didAssetsLoad && didFindMarker && !didExperienceStart) {
+          startExperience();
+        }
+      }
+    })
+
+    function hideInterface() {
+      const userInterface = document.getElementById('interface-container');
+      userInterface.style.display = 'none';
+    }
+
+    //Activate media on touch to enable sounds and playing later on
+    function activateMedia() {
+      for (let i = 0; i < assets.length; i++) {
+        const a = assets[i];
+        if (a.type === 'video' || a.type === 'audio') {
+          a.asset.play();
+          a.asset.pause();
+        }
+      }
+    }
+
+    //Listen to Marker Found Event
+    el.addEventListener('markerFound', (e) => {
+      if (!didFindMarker) {
+        didFindMarker = true;
+        if (didUserTap && didAssetsLoad && !didExperienceStart) {
+          startExperience();
+        } else if (didUserTap) {
+          showLoadingElement();
+        }
+      }
+    });
+
     //Loading
     function showLoadingElement() {
       //loadingEl.setAttribute('color', 'white');
@@ -61,6 +103,19 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     function updateLoadingProgress() {
       loadingEl.setAttribute('value', `${loadingAmount}%`);
+    }
+
+
+    //Start Experience
+    function startExperience() {
+      if (!didExperienceStart) {
+        //alert('start experience');
+        didExperienceStart = true;
+        //hideLoadingElement();
+        //showGiftModel();
+        //playPopSound();
+        //startBackgroundMusic();
+      }
     }
 
     //Configure and Load Assets
@@ -193,61 +248,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 /*AFRAME.registerComponent('happy-birthday-arjs', {
   init: function () {
 
-
-    //Listen to Button Click
-    const button = document.getElementById('start-button');
-    button.addEventListener('click', function() {
-      if (!didUserTap) {
-        didUserTap = true;
-        hideInterface();
-        activateMedia();
-          
-        if (didAssetsLoad && didFindMarker && !didExperienceStart) {
-          startExperience();
-        }
-      }
-    })
-
-    function hideInterface() {
-      const userInterface = document.getElementById('interface-container');
-      userInterface.style.display = 'none';
-    }
-
-    //Activate media on touch to enable sounds and playing later on
-    function activateMedia() {
-      for (let i = 0; i < assets.length; i++) {
-        const a = assets[i];
-        if (a.type === 'video' || a.type === 'audio') {
-          a.asset.play();
-          a.asset.pause();
-        }
-      }
-    }
-
-    //Listen to Marker Found Event
-    el.addEventListener('markerFound', (e) => {
-      if (!didFindMarker) {
-        didFindMarker = true;
-        if (didUserTap && didAssetsLoad && !didExperienceStart) {
-          startExperience();
-        } else if (didUserTap) {
-          showLoadingElement();
-        }
-      }
-    });
-
-    //Start Experience
-    function startExperience() {
-      if (!didExperienceStart) {
-        alert('start experience');
-        didExperienceStart = true;
-        hideLoadingElement();
-        showGiftModel();
-        playPopSound();
-        startBackgroundMusic();
-      }
-    }
-
     //Gift
     function showGiftModel() {
       giftElement.object3D.visible = true;
@@ -320,35 +320,12 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
 /*<!DOCTYPE html>
 <html>
-  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
   <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
   <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
-  <link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-  crossorigin="anonymous"/>
-  <link rel="stylesheet" type="text/css" href="./styles.css" />
+
   <body>
-    <div id="interface-container">
-      <div class="container-fluid" style="height: 100%;">
-        <div class="row justify-content-center align-items-center" style="height: 20%;">
-          <div class="col-10">
-            <h3 class="text-center" style="color: white">
-            Pointt Device at QR Code
-            </h3>
-          </div>
-        </div>
-  
-        <div class="row justify-content-center align-items-center" style="height: 60%;"></div>
-  
-        <div class="row justify-content-center align-items-center" style="height: 20%; z-index: 11;">
-          <button type="button" id="start-button" class="btn btn-primary">Got It</button>
-        </div>
-      </div>
-    </div>
+
 
     <a-scene happy-birthday-arjs embedded arjs renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;" vr-mode-ui="enabled: false;">
 
@@ -364,17 +341,6 @@ AFRAME.registerComponent('happy-birthday-arjs', {
 
     </a-scene>
 
-      <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"></script>
-      <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"></script>
-      <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"></script>
+
   </body>
 </html>*/

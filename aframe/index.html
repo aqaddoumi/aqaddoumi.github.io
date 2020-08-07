@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     </head>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
@@ -33,7 +32,7 @@
         </div>
       </div>
 
-      <a-scene happy-birthday-arjs embedded arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;" vr-mode-ui="enabled: false;">
+      <a-scene happy-birthday-arjs renderer="logarithmicDepthBuffer: true; antialias: true; colorManagement: true; sortObjects: true;" vr-mode-ui="enabled: false;">
 
         <a-assets timeout="10">
           <a-asset-item class="model" id="gift-asset" src="./assets/models/gift/scene.gltf"></a-asset-item>
@@ -75,9 +74,10 @@
           <a-timeline-animation select="#text-04" name="text_04_scale_down"></a-timeline-animation>
         </a-timeline>
 
-        <a-marker type='barcode' value='5'>
-          <a-entity>
+
+        <a-entity position="0 -1 -5">
             <a-text id="loading-text" value="0%" color="white"></a-text>
+
             <a-entity scale="0.1 0.1 0.1">
               <a-gltf-model visible="false" src="#gift-asset" id="gift-model" model-opacity="1" scale="0 0 0"
               animation__gift_01="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; autoplay: false; easing: easeInOutQuint"
@@ -91,7 +91,7 @@
               <a-gltf-model visible="false" src="#cat-asset" id="cat-model" animation-mixer scale="0 0 0"></a-gltf-model>
             </a-entity>
 
-            <a-entity>
+            <a-entity scale="0.1 0.1 0.1">
               <a-entity class="particles" particle-system="size: 0.3; velocityValue: 0 35 0; accelerationSpread: 2 0 2; blending: 1; color: #FEF000; texture: assets/images/confetti/confetti-01.png; enabled: false;"></a-entity>
               <a-entity class="particles" particle-system="size: 0.3; velocityValue: 0 35 0; accelerationSpread: 2 0 2; blending: 1; color: #38A7F8; texture: assets/images/confetti/confetti-02.png; enabled: false;"></a-entity>
               <a-entity class="particles" particle-system="size: 0.3; velocityValue: 0 35 0; accelerationSpread: 2 0 2; blending: 1; color: #FF1614; texture: assets/images/confetti/confetti-03.png; enabled: false;"></a-entity>
@@ -129,8 +129,14 @@
             <a-entity scale="0.1 0.1 0.1" position="0 3 0">
               <a-video id="birthday-video" width="7.2" height="12.8" scale="0 0 0" src="#birthday-video-asset" visible="false"></a-video>
             </a-entity>
-          </a-entity>
-        </a-marker>
+        </a-entity>
+
+        <a-box
+        id="ground"
+        scale="20 0.1 20"
+        position="0 -2 0"
+        color="#bdbdbd"
+        ></a-box>
 
         <a-entity camera></a-entity>
       </a-scene>

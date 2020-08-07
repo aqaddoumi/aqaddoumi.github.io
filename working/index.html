@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/aframe-animation-timeline-component@2.0.0/dist/aframe-animation-timeline-component.min.js"></script>
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
     <script src="happy-birthday-arjs.js"></script>
+
     <link rel="stylesheet" type="text/css" href="./styles.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 
@@ -75,9 +76,10 @@
           <a-timeline-animation select="#text-04" name="text_04_scale_down"></a-timeline-animation>
         </a-timeline>
 
+
         <a-marker type='barcode' value='5'>
-          <a-entity>
             <a-text id="loading-text" value="0%" color="white"></a-text>
+
             <a-entity scale="0.1 0.1 0.1">
               <a-gltf-model visible="false" src="#gift-asset" id="gift-model" model-opacity="1" scale="0 0 0"
               animation__gift_01="property: scale; from: 0 0 0; to: 1 1 1; dur: 500; autoplay: false; easing: easeInOutQuint"
@@ -126,10 +128,9 @@
               ></a-entity>
             </a-entity>
 
-            <a-entity scale="0.1 0.1 0.1" position="0 3 0">
+            <a-entity scale="0.1 0.1 0.1" position="0 1 0">
               <a-video id="birthday-video" width="7.2" height="12.8" scale="0 0 0" src="#birthday-video-asset" visible="false"></a-video>
             </a-entity>
-          </a-entity>
         </a-marker>
 
         <a-entity camera></a-entity>

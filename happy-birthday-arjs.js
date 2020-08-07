@@ -299,11 +299,11 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         'background-music-audio-asset'
       );
       musicAsset.currentTime = 0;
-      musicAsset.volume = 0;
+      musicAsset.volume = 1;
       musicAsset.muted = false;
       musicAsset.play();
 
-      let vol = 0;
+      /*let vol = 0;
       let interval = 200;
 
       var fadeInMusic = setInterval(function () {
@@ -316,16 +316,16 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         } else {
           clearInterval(fadeInMusic);
         }
-      }, interval);
+      }, interval);*/
     }
 
     function tuneDownBirthdayMusic() {
       const musicAsset = document.getElementById(
         'background-music-audio-asset'
       );
-      musicAsset.volume = 1;
+      musicAsset.volume = 0.2;
 
-      let vol = 1;
+      /*let vol = 1;
       let interval = 500;
       let newVol = 0.1;
 
@@ -339,7 +339,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         } else {
           clearInterval(fadeOutMusic);
         }
-      }, interval);
+      }, interval);*/
     }
 
     //Audio

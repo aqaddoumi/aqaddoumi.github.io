@@ -152,6 +152,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
       loadingEl.setAttribute('value', `${(loadingAmount * 100).toFixed()}%`);
     }
 
+    //Custom Experience
     //Gift
     function showGiftModel() {
       giftEl.object3D.visible = true;
@@ -167,7 +168,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         showCatModel();
         showBirthdayText();
         showBirthdayVideo();
-        tuneDownBirthdayMusic();
+        //tuneDownBirthdayMusic();
       });
     }
 
@@ -228,7 +229,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
           'timeline: #text-01-animation-timeline; loop:false;'
         );
         setTimeout(function() {
-          text01.parentNode.removeChild(text02);
+          text01.parentNode.removeChild(text01);
         }, 5000)
   
         setTimeout(function () {
@@ -249,7 +250,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
             'timeline: #text-03-animation-timeline; loop:false;'
           );
           setTimeout(function() {
-            text03.parentNode.removeChild(text02);
+            text03.parentNode.removeChild(text03);
           }, 5000)
         }, 500);
   
@@ -260,7 +261,7 @@ AFRAME.registerComponent('happy-birthday-arjs', {
             'timeline: #text-04-animation-timeline; loop:false;'
           );
           setTimeout(function() {
-            text04.parentNode.removeChild(text02);
+            text04.parentNode.removeChild(text04);
           }, 5000)
         }, 750);
       }, 2000);
@@ -277,8 +278,10 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         videoAsset.loop = false;
         videoAsset.addEventListener('ended', function() {
           hideBirthdayVideo();
+          turnUpBackgroundMusic();
         })
 
+        tuneDownBackgroundMusic();
         videoEl.setAttribute(
           'animation',
           'property: scale; to: 2 2 2; dur: 500;'
@@ -296,50 +299,41 @@ AFRAME.registerComponent('happy-birthday-arjs', {
     //Birthday Music
     function startBirthdayMusic() {
       const musicAsset = document.getElementById(
-        'background-music-audio-asset'
+        'background-music-audio-asset-high'
       );
-      musicAsset.currentTime = 0;
       musicAsset.volume = 1;
       musicAsset.muted = false;
       musicAsset.play();
-
-      /*let vol = 0;
-      let interval = 200;
-
-      var fadeInMusic = setInterval(function () {
-        if (vol < 1) {
-          vol += 0.05;
-          if (vol > 1) {
-            vol = 1;
-          }
-          musicAsset.volume = vol;
-        } else {
-          clearInterval(fadeInMusic);
-        }
-      }, interval);*/
     }
 
-    function tuneDownBirthdayMusic() {
-      const musicAsset = document.getElementById(
-        'background-music-audio-asset'
+    function tuneDownBackgroundMusic() {
+      const musicAssetHigh = document.getElementById(
+        'background-music-audio-asset-high'
       );
-      musicAsset.volume = 0.2;
+      musicAssetHigh.pause();
 
-      /*let vol = 1;
-      let interval = 500;
-      let newVol = 0.1;
+      const musicAssetLow = document.getElementById(
+        'background-music-audio-asset-low'
+      );
+      musicAssetLow.volume = 1;
+      musicAssetLow.muted = false;
+      musicAssetLow.currentTime = musicAssetHigh.currentTime;
+      musicAssetLow.play();
+    }
 
-      var fadeOutMusic = setInterval(function () {
-        if (vol > newVol) {
-          vol -= 0.05;
-          if (vol < newVol) {
-            vol = newVol;
-          }
-          musicAsset.volume = vol;
-        } else {
-          clearInterval(fadeOutMusic);
-        }
-      }, interval);*/
+    function turnUpBackgroundMusic() {
+      const musicAssetLow = document.getElementById(
+        'background-music-audio-asset-low'
+      );
+      musicAssetLow.pause();
+
+      const musicAssetHigh = document.getElementById(
+        'background-music-audio-asset-high'
+      );
+      musicAssetHigh.volume = 1;
+      musicAssetHigh.muted = false;
+      musicAssetHigh.currentTime = musicAssetLow.currentTime;
+      musicAssetHigh.play();
     }
 
     //Audio
@@ -362,6 +356,8 @@ AFRAME.registerComponent('happy-birthday-arjs', {
         audioAsset.play();
       }, 250);
     }
+    //End Custom
+
 
     //Add Video Assets into assets array
     function addVideoAssets() {
